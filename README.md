@@ -5,6 +5,7 @@ ErupteD-V2
 =======
 
 Automatically-generated D bindings for the [Vulkan API](https://www.khronos.org/Vulkan/) based on [D-Vulkan](https://github.com/ColonelThirtyTwo/dvulkan). A Vulkan lib loader is included. Acquiring Vulkan functions is based on Intel [API without Secrets](https://software.intel.com/en-us/api-without-secrets-introduction-to-vulkan-part-1).
+ErupteD-V2 will eventually replace ErrupteD. Reasoning why ErupteD-V2 is required in the first place can be found in the [deprecation and upgrade process](https://github.com/ParticlePeter/Erupted-V2#erupted-deprecation-and-upgrade-process) paragraph.
 
 Usage
 -----
@@ -16,23 +17,24 @@ Platform specific Vulkan functionality, like platform surface extensions (see [P
 
 Steps to follow:
 
-1. Import vulkan lib loader via `import erupted.vulkan_lib_loader;`.
-2. Call `loadGlobalLevelFunctions()` (and check the result!) to load the following functions:
+1. import vulkan lib loader via `import erupted.vulkan_lib_loader;`.
+2. call `loadGlobalLevelFunctions()` (and check the result!) to load the following functions:
 	* `vkGetInstanceProcAddr`
 	* `vkCreateInstance`
 	* `vkEnumerateInstanceExtensionProperties`
 	* `vkEnumerateInstanceLayerProperties`
-	If success (result == true) skip to step 5.
-3. On failure, get a pointer to the `vkGetInstanceProcAddr` through platform-specific means (e.g. loading the Vulkan shared library manually, or `glfwGetInstanceProcAddress` [if using GLFW3 >= v3.2 with DerelictGLFW3 >= v3.1.0](https://github.com/ParticlePeter/ErupteD-GLFW)).
-4. Call `loadGlobalLevelFunctions(getInstanceProcAddr)`, where `getInstanceProcAddr` is the address of the loaded `vkGetInstanceProcAddr` function. This loads the same functions as described in step 2.
-5. Create a `VkInstance` using the above functions.
-6. Call `loadInstanceLevelFunctions(VkInstance)` to load additional `VkInstance` related functions. Get information about available physical devices (e.g. GPU(s), APU(s), etc.) and physical device related resources (e.g. Queue Families, Queues per Family, etc.)
-7. Now three options are available to acquire a logical device and device resource related functions:
-	* Call `loadDeviceLevelFunctions(VkInstance)`, the acquired functions call indirectly through the `VkInstance` and will be internally dispatched to various devices by the implementation
-	* Call `loadDeviceLevelFunctions(VkDevice)`, the acquired functions call directly the `VkDevice` and related resources. This path is faster, skips one indirection, but is useful only in a single physical device environment. Calling the same function with another `VkDevice` will overwrite all the previously fetched function
-	* Create a DispatchDevice with Vulkan functions as members kind of namespaced, see [DispatchDevice](https://github.com/ParticlePeter/ErupteD#dispatchdevice)
 
-Examples can be found in the `examples` directory, and run with `dub run erupted:examplename`
+	if the call was successful (returns true), skip to 5.
+3. on failure, get a pointer to the `vkGetInstanceProcAddr` through platform-specific means (e.g. loading the Vulkan shared library manually, or `glfwGetInstanceProcAddress` [if using GLFW3 >= v3.2 with DerelictGLFW3 >= v3.1.0](https://github.com/ParticlePeter/ErupteD-GLFW)).
+4. call `loadGlobalLevelFunctions(getInstanceProcAddr)`, where `getInstanceProcAddr` is the address of the loaded `vkGetInstanceProcAddr` function. This loads the same functions as described in step 2.
+5. create a `VkInstance` using the above functions.
+6. call `loadInstanceLevelFunctions(VkInstance)` to load additional `VkInstance` related functions. Get information about available physical devices (e.g. GPU(s), APU(s), etc.) and physical device related resources (e.g. Queue Families, Queues per Family, etc.)
+7. three options are available to acquire a logical device and device resource related functions:
+	* call `loadDeviceLevelFunctions(VkInstance)`, the acquired functions call indirectly through the `VkInstance` and will be internally dispatched to various devices by the implementation
+	* call `loadDeviceLevelFunctions(VkDevice)`, the acquired functions call directly the `VkDevice` and related resources. This path is faster, skips one indirection, but is useful only in a single physical device environment. Calling the same function with another `VkDevice` will overwrite all the previously fetched function
+	* create a DispatchDevice with Vulkan functions as members kind of namespaced, see [DispatchDevice](https://github.com/ParticlePeter/ErupteD#dispatchdevice)
+
+Examples for checking instnace and device layers as well as device creation can be found in the `examples` directory, and run with `dub run erupted:examplename`. Examples found in 'examples/platform' directory are just explenatory and cannot be build or run (see [Platform Extensions](https://github.com/ParticlePeter/Erupted-V2#platform-extensions))
 
 C vs D API
 --------------
@@ -83,11 +85,6 @@ The Mechanism does NOT work with queues, there are about four queue related func
 Platform extensions
 ---------------------------
 
-Platform extensions work with type and possibly functions defined in platform specific headers like `windows.h` or `X11/Xlib.h`. Most important use of these extensions are arguably platform surfaces. The third party library `glfw3` is a solid way to deal with Vulkan platform surfaces in a platform agnostic way. However, by design, `glfw3` does not support surface unrelated platform extensions (e.g. `VK_KHR_external_memory_win32`).
-The only official platform API (as in being part of the dlang standard lib/runtime) is the windows API, but luckily ports of other platform APIs do exist in the dub registry.
-ErupteD should not rely on unofficial dependencies, as they may brake or become deprecated.
-Moreover, specifying several different platform dependencies does pollute the local dub cache with foreign platform projects not usable on the current platform (e.g. `xlib-d` on windows platform).
-
 Platform extensions, found in module `erupted.platform.mixin_extensions`, exist in form of the configurable `mixin template Platform_Extensions( extensions... )`. With this template you can mixin extension related code into your project, but you need to take care of the dependencies yourself:
 ```
 // platform extension example with xlib-d
@@ -105,6 +102,11 @@ Module `erupted.platform.mixin_extensions` defines enums corresponding to extens
 
 You'll find example modules in `examples/platform` for wayland, xcb and xlib. Copy the whole module or its content into your project end possibly edit its name and imported platform module. If you figure out which dependencies are available for other platform extensions, please notify me through an issue or send me a PR.
 
+Reasoning for the redesign:
+Platform extensions work with types, and possibly functions, defined in platform specific C headers like `windows.h` or `X11/Xlib.h`. Most important use case of these extensions is arguably platform surface mechanics. The third party library `glfw3` is a solid way to deal with Vulkan platform surfaces in a platform agnostic way. However, by design, `glfw3` does not support surface unrelated platform extensions (e.g. `VK_KHR_external_memory_win32`).
+The only official platform API (as in being part of the dlang standard lib/runtime) is the windows API, but luckily ports of other platform APIs do exist in the dub registry.
+ErupteD should not rely on unofficial dependencies, as they may brake or become deprecated.
+Moreover, specifying several different platform dependencies in dub.sdle/.json does pollute the local dub cache with foreign platform projects, even if they are usable on the current platform (e.g. `xlib-d` on windows platform).
 
 Generating Bindings
 -------------------
@@ -113,14 +115,14 @@ The generator for Erupted-V2 was split off into its own github project [V-Erupt]
 V-Erupt is a submodule of Erupted-V2. Either invoke `
 git submodule update --init --recursive` or pull it to some other location (it is not a dub project!).
 You'll also need the [Vulkan-Docs](https://github.com/KhronosGroup/Vulkan-Docs) repo (Requires Python 3 and lxml.etree).
-Finally, to erupt the d bindings, call `erupt_dlang.py` passing `path/to/Vulkan-docs` as first argument and an output folder for the D files as second argument.
+Finally, to erupt the DLang bindings, call `erupt_dlang.py` passing `path/to/Vulkan-docs` as first argument and an output folder for the D files as second argument.
 
 
 ErupteD deprecation and upgrade process
 -------------------
-ErupteD-V2 is supposed to replace ErupteD, preferably keeping the original project name. The challenge in this endeavor lies in the significant breaking changes and the desired reset of the dub versioning. The replaced ErupteD is supposed to match the Vulkan-Docs versioning, but the current Erupted version is far beyond those.
+ErupteD-V2 is supposed to replace ErupteD, preferably keeping the original project name. The challenge in this endeavor lies in the significant breaking changes and the desired reset of semantic versions. The replaced ErupteD is supposed to match the Vulkan-Docs versioning, but the current ErupteD versioning is far beyond those.
 
-The following release and deprecation process shall ease the transition to the clean slate ErupteD:
+The following release and deprecation process shall ease the transition from old to new clean slate ErupteD:
 
 - [ x ] release ErupteD-V2
 - [ x ] release ErupteD-V1, forked from the current EruptedD
