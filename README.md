@@ -19,28 +19,28 @@ Steps to follow:
 
 1. import vulkan lib loader via `import erupted.vulkan_lib_loader;`.
 2. call `loadGlobalLevelFunctions()` (and check the result!) to load the following functions:
-	* `vkGetInstanceProcAddr`
-	* `vkCreateInstance`
-	* `vkEnumerateInstanceExtensionProperties`
-	* `vkEnumerateInstanceLayerProperties`
+    * `vkGetInstanceProcAddr`
+    * `vkCreateInstance`
+    * `vkEnumerateInstanceExtensionProperties`
+    * `vkEnumerateInstanceLayerProperties`
 
-	if the call was successful (returns true), skip to 5.
+    if the call was successful (returns true), skip to 5.
 3. on failure, get a pointer to the `vkGetInstanceProcAddr` through platform-specific means (e.g. loading the Vulkan shared library manually, or `glfwGetInstanceProcAddress` [if using GLFW3 >= v3.2 with DerelictGLFW3 >= v3.1.0](https://github.com/ParticlePeter/ErupteD-GLFW)).
 4. call `loadGlobalLevelFunctions(getInstanceProcAddr)`, where `getInstanceProcAddr` is the address of the loaded `vkGetInstanceProcAddr` function. This loads the same functions as described in step 2.
 5. create a `VkInstance` using the above functions.
 6. call `loadInstanceLevelFunctions(VkInstance)` to load additional `VkInstance` related functions. Get information about available physical devices (e.g. GPU(s), APU(s), etc.) and physical device related resources (e.g. Queue Families, Queues per Family, etc.)
 7. three options are available to acquire a logical device and device resource related functions:
-	* call `loadDeviceLevelFunctions(VkInstance)`, the acquired functions call indirectly through the `VkInstance` and will be internally dispatched to various devices by the implementation
-	* call `loadDeviceLevelFunctions(VkDevice)`, the acquired functions call directly the `VkDevice` and related resources. This path is faster, skips one indirection, but is useful only in a single physical device environment. Calling the same function with another `VkDevice` will overwrite all the previously fetched function
-	* create a DispatchDevice with Vulkan functions as members kind of namespaced, see [DispatchDevice](https://github.com/ParticlePeter/ErupteD#dispatchdevice)
+    * call `loadDeviceLevelFunctions(VkInstance)`, the acquired functions call indirectly through the `VkInstance` and will be internally dispatched to various devices by the implementation
+    * call `loadDeviceLevelFunctions(VkDevice)`, the acquired functions call directly the `VkDevice` and related resources. This path is faster, skips one indirection, but is useful only in a single physical device environment. Calling the same function with another `VkDevice` will overwrite all the previously fetched function
+    * create a DispatchDevice with Vulkan functions as members kind of namespaced, see [DispatchDevice](https://github.com/ParticlePeter/ErupteD#dispatchdevice)
 
 Examples for checking instnace and device layers as well as device creation can be found in the `examples` directory, and run with `dub run erupted:examplename`. Examples found in 'examples/platform' directory are just explenatory and cannot be build or run (see [Platform Extensions](https://github.com/ParticlePeter/Erupted-V2#platform-extensions))
 
 C vs D API
 --------------
 * `VK_NULL_HANDLE` is defined as `0` and can be used as `uint64_t` type and `pointer` type argument in C world. D's `null` can be used only as a pointer argument. This is an issue when compiling for 32 bit, as dispatchable handles (`VkInstance`, `VkPhysicalDevice`, `VkDevice`, `VkQueue`) are pointer types while non dispatchable handles (e.g. `VkSemaphore`) are `uint64_t` types. Hence ErupteD `VK_NULL_HANDLE` can only be used as dispatchable null handle (on 32 Bit!). For non dispatchable handles another ErupteD symbol exist `VK_NULL_ND_HANDLE`. On 64 bit all handles are pointer types and `VK_NULL_HANDLE` can be used at any place. However `VK_NULL_ND_HANDLE` is still defined for sake of completeness and ease of use. The issue might be solved when `multiple alias this` is released, hence I recommend building 64 Bit apps and ignore `VK_NULL_ND_HANDLE`. Best practice summary:
-	* If exclusively building a 32 Bit app or switching forth and back between 32 and 64 Bit use `VK_NULL_ND_HANDLE` for non dispatchable handles
-	* If exclusively building a 64 Bit app `VK_NULL_HANDLE` can be used as any of the two vk handle types
+    * If exclusively building a 32 Bit app or switching forth and back between 32 and 64 Bit use `VK_NULL_ND_HANDLE` for non dispatchable handles
+    * If exclusively building a 64 Bit app `VK_NULL_HANDLE` can be used as any of the two vk handle types
 * Named enums in D are not global but they are forwarded into global scope. Hence e.g. `VkResult.VK_SUCCESS` and `VK_SUCCESS` can both be used.
 * All structures have their `sType` field set to the appropriate value upon initialization; explicit initialization is not needed.
 * `VkPipelineShaderStageCreateInfo.module` has been renamed to `VkPipelineShaderStageCreateInfo._module`, since `module` is a D keyword.
@@ -53,28 +53,28 @@ DispatchDevice
 
 The `DispatchDevice` holds a `VkDevice`, a pointer to `const VkAllocationCallbacks` and the Vulkan functions loaded from that device, collision protected. The allocator is optional for Vulkan as well as for the DispatchDevice. If it not specified the default allocator will be used. An allocator is locked to the device throughout its lifetime. Before usage the `DispatchDevice` must be initialize, either immediately:
 ```
-	auto dd = DispatchDevice( device, allocator );
+    auto dd = DispatchDevice( device, allocator );
 ```
 or delayed:
 ```
-	DispatchDevice dd;
-	dd.loadDeviceLevelFunctions( device, allocator );
+    DispatchDevice dd;
+    dd.loadDeviceLevelFunctions( device, allocator );
 ```
 `VkDevice` and  `VkAllocationCallbacks` are private and must not change as the member vkFunctions can only be used with this device and, when required, this allocator. It can be accessed with the properties `vkDevice` and `pAllocator`:
 ```
-	auto dd = DispatchDevice( device );
-	dd.vkDestroyDevice( dd.vkDevice, dd.pAllocator );
+    auto dd = DispatchDevice( device );
+    dd.vkDestroyDevice( dd.vkDevice, dd.pAllocator );
 ```
 The `DispatchDevice` has also convenience functions. With these the device and allocator arguments can be omitted. They forward to the corresponding Vulkan function, the device and allocator argument are supplied by the private `VkDevice` and `VkAllocationCallbacks` members. The crux is that function pointers can't be overloaded with regular functions hence the `vk` prefix is ditched for the convenience variants:
 ```
-	auto dd = DispatchDevice( device );
-	dd.DestroyDevice:		// instead of: dd.vkDestroyDevice( dd.vkDevice, dd.pAllocator );
+    auto dd = DispatchDevice( device );
+    dd.DestroyDevice:       // instead of: dd.vkDestroyDevice( dd.vkDevice, dd.pAllocator );
 ```
 Same mechanism works with functions which require a VkCommandBuffer as first arg, but before using them the public member 'commandBuffer' must be set with the target VkCommandBuffer:
 ```
-	dd.commandBuffer = some_command_buffer;
-	dd.BeginCommandBuffer( &beginInfo );
-	dd.CmdBindPipeline( VK_PIPELINE_BIND_POINT_GRAPHICS, some_pipeline );
+    dd.commandBuffer = some_command_buffer;
+    dd.BeginCommandBuffer( &beginInfo );
+    dd.CmdBindPipeline( VK_PIPELINE_BIND_POINT_GRAPHICS, some_pipeline );
 ```
 Needless to say that `some_command_buffer` must have been acquired from the private device member, or some other handle to that device.  
 The Mechanism does NOT work with queues, there are about four queue related functions which most probably won't be used in bulk.
@@ -88,9 +88,9 @@ Platform extensions, found in module `erupted.platform.mixin_extensions`, exist 
 // platform extension example with xlib-d
 // xlib-d must be speciefied as dependency in your projects dub file
 module spocks_logic;
-public import X11.Xlib;									// publicly import required API
-import erupted.platform.mixin_extensions;				// import the template mixin
-mixin Platform_Extensions!VK_USE_PLATFORM_XLIB_KHR;		// mixin all xlib related extensions
+public import X11.Xlib;                                 // publicly import required API
+import erupted.platform.mixin_extensions;               // import the template mixin
+mixin Platform_Extensions!VK_USE_PLATFORM_XLIB_KHR;     // mixin all xlib related extensions
 ```
 The template publicly imports `erupted.types` and `erupted.functions`. This is necessary as some functions from the latter module are overwritten/extended to also load related Vulkan extension functions.  `DispatchDevice` from module `erupted.dispatch_device` is also extended/overwritten with the corresponding extension functions. If you would include both, your module and `erupted.functions` in another module, `loadInstanceLevelFunctions`, `loadDeviceLevelFunctions` and `DispatchDevice` would collide.
 
