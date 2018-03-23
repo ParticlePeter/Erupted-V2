@@ -121,10 +121,12 @@ ErupteD-V2 is supposed to replace ErupteD, preferably keeping the original proje
 The following release and deprecation process shall ease the transition from old to new clean slate ErupteD:
 
 - [ x ] release ErupteD-V2
-- [ x ] release ErupteD-V1, forked from the current EruptedD
+- [ x ] rename ErupteD to ErupteD-V1
+- [ x ] create new repo ErupteD and add ErupteD-V1 as upstrem repo
 - [ x ] deprecate ErupteD module `erupted.types` in place of the whole ErupteD project
-- [ _ ] May 1st 2018, recreate ErupteD as fork of ErupteD-V2
-- [ _ ] deprecate ErupteD-V2
+- [ _ ] May 1st 2018, destroy ErupteD project and rename ErupteD-V2 to ErupteD
+- [ _ ] create new repo ErupteD-V2 and add ErupteD as upstream repo
+- [ _ ] deprecate ErupteD-V2 module `erupted.types` in place of the whole ErupteD-V2 project
 - [ _ ] June 1st 2018 destroy ErupteD-V2
 - [ _ ] destroy or archive ErupteD-V1
 
