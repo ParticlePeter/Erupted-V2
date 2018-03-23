@@ -5,7 +5,7 @@ ErupteD-V2
 =======
 
 Automatically-generated D bindings for the [Vulkan API](https://www.khronos.org/Vulkan/) based on [D-Vulkan](https://github.com/ColonelThirtyTwo/dvulkan). A Vulkan lib loader is included. Acquiring Vulkan functions is based on Intel [API without Secrets](https://software.intel.com/en-us/api-without-secrets-introduction-to-vulkan-part-1).
-ErupteD-V2 will eventually replace ErrupteD. Reasoning why ErupteD-V2 is required in the first place can be found in the [deprecation and upgrade process](https://github.com/ParticlePeter/Erupted-V2#erupted-deprecation-and-upgrade-process) paragraph.
+ErupteD-V2 will eventually replace ErrupteD. Later on Erupted-V2 will be renamed back to ErupteD. Reasoning why ErupteD-V2 is required in the first place can be found in the [deprecation and upgrade process](https://github.com/ParticlePeter/Erupted-V2#erupted-deprecation-and-upgrade-process) paragraph. Later,
 
 Usage
 -----
@@ -115,7 +115,7 @@ The generator for Erupted-V2 was split off into its own github project [V-Erupt]
 V-Erupt is a submodule of Erupted-V2. Either invoke `
 git submodule update --init --recursive` or pull it to some other location (it is not a dub project!).
 You'll also need the [Vulkan-Docs](https://github.com/KhronosGroup/Vulkan-Docs) repo (Requires Python 3 and lxml.etree).
-Finally, to erupt the DLang bindings, call `erupt_dlang.py` passing `path/to/Vulkan-docs` as first argument and an output folder for the D files as second argument.
+Finally, to erupt the d bindings, call `erupt_dlang.py` passing `path/to/Vulkan-docs` as first argument and an output folder for the D files as second argument.
 
 
 ErupteD deprecation and upgrade process
