@@ -1,0 +1,24 @@
+name            "erupted_v2"
+description     "Auto-generated D bindings for Vulkan"
+copyright       "Copyright 2015-2016 The Khronos Group Inc.; Copyright 2016 Alex Parrill, Peter Particle"
+authors         "Alex Parrill" "Peter Particle"
+targetType      "sourceLibrary"
+license         "MIT"
+
+// example how to initialize a logical device
+subPackage {
+    name                "devices"
+    description         "Simple Vulkan example"
+    targetType          "executable"
+    sourceFiles         "examples/devices.d"
+    dependency          "erupted_v2"    path = "."
+}
+
+// example how query and enable layers
+subPackage {
+    name                "layers"
+    description         "Simple Vulkan example"
+    targetType          "executable"
+    sourceFiles         "examples/layers.d"
+    dependency          "erupted_v2"    path = "."
+}
