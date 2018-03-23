@@ -17,7 +17,7 @@ Platform specific Vulkan functionality, like platform surface extensions (see [P
 
 Steps to follow:
 
-1. import vulkan lib loader via `import erupted.vulkan_lib_loader;`.
+1. import vulkan lib loader via `import erupted.vulkan_lib_loader;`
 2. call `loadGlobalLevelFunctions()` (and check the result!) to load the following functions:
     * `vkGetInstanceProcAddr`
     * `vkCreateInstance`
@@ -25,9 +25,9 @@ Steps to follow:
     * `vkEnumerateInstanceLayerProperties`
 
     if the call was successful (returns true), skip to 5.
-3. on failure, get a pointer to the `vkGetInstanceProcAddr` through platform-specific means (e.g. loading the Vulkan shared library manually, or `glfwGetInstanceProcAddress` [if using GLFW3 >= v3.2 with DerelictGLFW3 >= v3.1.0](https://github.com/ParticlePeter/ErupteD-GLFW)).
+3. on failure, get a pointer to the `vkGetInstanceProcAddr` through platform-specific means (e.g. loading the Vulkan shared library manually, or `glfwGetInstanceProcAddress` [if using GLFW3 >= v3.2 with DerelictGLFW3 >= v3.1.0](https://github.com/ParticlePeter/ErupteD-GLFW))
 4. call `loadGlobalLevelFunctions(getInstanceProcAddr)`, where `getInstanceProcAddr` is the address of the loaded `vkGetInstanceProcAddr` function. This loads the same functions as described in step 2.
-5. create a `VkInstance` using the above functions.
+5. create a `VkInstance` using the above functions
 6. call `loadInstanceLevelFunctions(VkInstance)` to load additional `VkInstance` related functions. Get information about available physical devices (e.g. GPU(s), APU(s), etc.) and physical device related resources (e.g. Queue Families, Queues per Family, etc.)
 7. three options are available to acquire a logical device and device resource related functions:
     * call `loadDeviceLevelFunctions(VkInstance)`, the acquired functions call indirectly through the `VkInstance` and will be internally dispatched to various devices by the implementation
@@ -39,11 +39,11 @@ Examples for checking instnace and device layers as well as device creation can 
 C vs D API
 --------------
 * `VK_NULL_HANDLE` is defined as `0` and can be used as `uint64_t` type and `pointer` type argument in C world. D's `null` can be used only as a pointer argument. This is an issue when compiling for 32 bit, as dispatchable handles (`VkInstance`, `VkPhysicalDevice`, `VkDevice`, `VkQueue`) are pointer types while non dispatchable handles (e.g. `VkSemaphore`) are `uint64_t` types. Hence ErupteD `VK_NULL_HANDLE` can only be used as dispatchable null handle (on 32 Bit!). For non dispatchable handles another ErupteD symbol exist `VK_NULL_ND_HANDLE`. On 64 bit all handles are pointer types and `VK_NULL_HANDLE` can be used at any place. However `VK_NULL_ND_HANDLE` is still defined for sake of completeness and ease of use. The issue might be solved when `multiple alias this` is released, hence I recommend building 64 Bit apps and ignore `VK_NULL_ND_HANDLE`. Best practice summary:
-    * If exclusively building a 32 Bit app or switching forth and back between 32 and 64 Bit use `VK_NULL_ND_HANDLE` for non dispatchable handles
-    * If exclusively building a 64 Bit app `VK_NULL_HANDLE` can be used as any of the two vk handle types
-* Named enums in D are not global but they are forwarded into global scope. Hence e.g. `VkResult.VK_SUCCESS` and `VK_SUCCESS` can both be used.
-* All structures have their `sType` field set to the appropriate value upon initialization; explicit initialization is not needed.
-* `VkPipelineShaderStageCreateInfo.module` has been renamed to `VkPipelineShaderStageCreateInfo._module`, since `module` is a D keyword.
+    * if exclusively building a 32 Bit app or switching forth and back between 32 and 64 Bit use `VK_NULL_ND_HANDLE` for non dispatchable handles
+    * if exclusively building a 64 Bit app `VK_NULL_HANDLE` can be used as any of the two vk handle types
+* named enums in D are not global but they are forwarded into global scope. Hence e.g. `VkResult.VK_SUCCESS` and `VK_SUCCESS` can both be used
+* all structures have their `sType` field set to the appropriate value upon initialization; explicit initialization is not needed
+* `VkPipelineShaderStageCreateInfo.module` has been renamed to `VkPipelineShaderStageCreateInfo._module`, since `module` is a D keyword
 
 
 
