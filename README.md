@@ -80,7 +80,7 @@ Needless to say that `some_command_buffer` must have been acquired from the priv
 The Mechanism does NOT work with queues, there are about four queue related functions which most probably won't be used in bulk.
 
 
-Platform extensions
+Platform Extensions
 ---------------------------
 
 Platform extensions, found in module `erupted.platform.mixin_extensions`, exist in form of the configurable `mixin template Platform_Extensions( extensions... )`. With this template you can mixin extension related code into your project, but you need to take care of the dependencies yourself:
@@ -114,7 +114,7 @@ V-Erupt is a submodule of Erupted-V2. Either invoke `git submodule update --init
 Finally, to erupt the DLang bindings, call `erupt_dlang.py` passing `path/to/Vulkan-docs` as first argument and an output folder for the D files as second argument.
 
 
-ErupteD deprecation and upgrade process
+ErupteD Deprecation and Upgrade Process
 -------------------
 ErupteD-V2 is supposed to replace ErupteD, preferably keeping the original project name. The challenge in this endeavor lies in the significant breaking changes and the desired reset of semantic versions. The replaced ErupteD is supposed to match the Vulkan-Docs versioning, but the current ErupteD versioning is far beyond those.
 
