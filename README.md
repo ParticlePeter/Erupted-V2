@@ -104,14 +104,14 @@ Reasoning for the redesign:
 Platform extensions work with types, and possibly functions, defined in platform specific C headers like `windows.h` or `X11/Xlib.h`. Most important use case of these extensions is arguably platform surface mechanics. The third party library `glfw3` is a solid way to deal with Vulkan platform surfaces in a platform agnostic way. However, by design, `glfw3` does not support surface unrelated platform extensions (e.g. `VK_KHR_external_memory_win32`).  
 The only official platform API (as in being part of the dlang standard lib/runtime) is the windows API, but luckily ports of other platform APIs do exist in the dub registry.  
 ErupteD should not rely on unofficial dependencies, as they may brake or become deprecated.
-Moreover, specifying several different platform dependencies in dub.sdle/.json does pollute the local dub cache with foreign platform projects, even if they are usable on the current platform (e.g. `xlib-d` on windows platform).
+Moreover, specifying several different platform dependencies in dub.sdl/.json does pollute the local dub cache with foreign platform projects, even if they are usable on the current platform (e.g. `xlib-d` on windows platform).
 
 Generating Bindings
 -------------------
 
 The generator for Erupted-V2 was split off into its own github project [V-Erupt](https://github.com/ParticlePeter/V-Erupt). With this approach Erupte-V2 releases can correspond to Vulkan docs version releases.  
 V-Erupt is a submodule of Erupted-V2. Either invoke `git submodule update --init --recursive` or pull it to some other location (it is not a dub project!). You'll also need the [Vulkan-Docs](https://github.com/KhronosGroup/Vulkan-Docs) repo (Requires Python 3 and lxml.etree).  
-Finally, to erupt the DLang bindings, call `erupt_dlang.py` passing `path/to/Vulkan-docs` as first argument and an output folder for the D files as second argument.
+Finally, to erupt the dlang bindings, call `erupt_dlang.py` passing `path/to/Vulkan-docs` as first argument and an output folder for the D files as second argument.
 
 
 ErupteD Deprecation and Upgrade Process
