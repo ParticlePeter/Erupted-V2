@@ -154,6 +154,36 @@ extern( System ) {
     alias PFN_vkCmdEndRenderPass                                 = void      function( VkCommandBuffer commandBuffer );
     alias PFN_vkCmdExecuteCommands                               = void      function( VkCommandBuffer commandBuffer, uint32_t commandBufferCount, const( VkCommandBuffer )* pCommandBuffers );
 
+    // VK_VERSION_1_1
+    alias PFN_vkEnumerateInstanceVersion                         = VkResult  function( uint32_t* pApiVersion );
+    alias PFN_vkBindBufferMemory2                                = VkResult  function( VkDevice device, uint32_t bindInfoCount, const( VkBindBufferMemoryInfo )* pBindInfos );
+    alias PFN_vkBindImageMemory2                                 = VkResult  function( VkDevice device, uint32_t bindInfoCount, const( VkBindImageMemoryInfo )* pBindInfos );
+    alias PFN_vkGetDeviceGroupPeerMemoryFeatures                 = void      function( VkDevice device, uint32_t heapIndex, uint32_t localDeviceIndex, uint32_t remoteDeviceIndex, VkPeerMemoryFeatureFlags* pPeerMemoryFeatures );
+    alias PFN_vkCmdSetDeviceMask                                 = void      function( VkCommandBuffer commandBuffer, uint32_t deviceMask );
+    alias PFN_vkCmdDispatchBase                                  = void      function( VkCommandBuffer commandBuffer, uint32_t baseGroupX, uint32_t baseGroupY, uint32_t baseGroupZ, uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ );
+    alias PFN_vkEnumeratePhysicalDeviceGroups                    = VkResult  function( VkInstance instance, uint32_t* pPhysicalDeviceGroupCount, VkPhysicalDeviceGroupProperties* pPhysicalDeviceGroupProperties );
+    alias PFN_vkGetImageMemoryRequirements2                      = void      function( VkDevice device, const( VkImageMemoryRequirementsInfo2 )* pInfo, VkMemoryRequirements2* pMemoryRequirements );
+    alias PFN_vkGetBufferMemoryRequirements2                     = void      function( VkDevice device, const( VkBufferMemoryRequirementsInfo2 )* pInfo, VkMemoryRequirements2* pMemoryRequirements );
+    alias PFN_vkGetImageSparseMemoryRequirements2                = void      function( VkDevice device, const( VkImageSparseMemoryRequirementsInfo2 )* pInfo, uint32_t* pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2* pSparseMemoryRequirements );
+    alias PFN_vkGetPhysicalDeviceFeatures2                       = void      function( VkPhysicalDevice physicalDevice, VkPhysicalDeviceFeatures2* pFeatures );
+    alias PFN_vkGetPhysicalDeviceProperties2                     = void      function( VkPhysicalDevice physicalDevice, VkPhysicalDeviceProperties2* pProperties );
+    alias PFN_vkGetPhysicalDeviceFormatProperties2               = void      function( VkPhysicalDevice physicalDevice, VkFormat format, VkFormatProperties2* pFormatProperties );
+    alias PFN_vkGetPhysicalDeviceImageFormatProperties2          = VkResult  function( VkPhysicalDevice physicalDevice, const( VkPhysicalDeviceImageFormatInfo2 )* pImageFormatInfo, VkImageFormatProperties2* pImageFormatProperties );
+    alias PFN_vkGetPhysicalDeviceQueueFamilyProperties2          = void      function( VkPhysicalDevice physicalDevice, uint32_t* pQueueFamilyPropertyCount, VkQueueFamilyProperties2* pQueueFamilyProperties );
+    alias PFN_vkGetPhysicalDeviceMemoryProperties2               = void      function( VkPhysicalDevice physicalDevice, VkPhysicalDeviceMemoryProperties2* pMemoryProperties );
+    alias PFN_vkGetPhysicalDeviceSparseImageFormatProperties2    = void      function( VkPhysicalDevice physicalDevice, const( VkPhysicalDeviceSparseImageFormatInfo2 )* pFormatInfo, uint32_t* pPropertyCount, VkSparseImageFormatProperties2* pProperties );
+    alias PFN_vkTrimCommandPool                                  = void      function( VkDevice device, VkCommandPool commandPool, VkCommandPoolTrimFlags flags );
+    alias PFN_vkGetDeviceQueue2                                  = void      function( VkDevice device, const( VkDeviceQueueInfo2 )* pQueueInfo, VkQueue* pQueue );
+    alias PFN_vkCreateSamplerYcbcrConversion                     = VkResult  function( VkDevice device, const( VkSamplerYcbcrConversionCreateInfo )* pCreateInfo, const( VkAllocationCallbacks )* pAllocator, VkSamplerYcbcrConversion* pYcbcrConversion );
+    alias PFN_vkDestroySamplerYcbcrConversion                    = void      function( VkDevice device, VkSamplerYcbcrConversion ycbcrConversion, const( VkAllocationCallbacks )* pAllocator );
+    alias PFN_vkCreateDescriptorUpdateTemplate                   = VkResult  function( VkDevice device, const( VkDescriptorUpdateTemplateCreateInfo )* pCreateInfo, const( VkAllocationCallbacks )* pAllocator, VkDescriptorUpdateTemplate* pDescriptorUpdateTemplate );
+    alias PFN_vkDestroyDescriptorUpdateTemplate                  = void      function( VkDevice device, VkDescriptorUpdateTemplate descriptorUpdateTemplate, const( VkAllocationCallbacks )* pAllocator );
+    alias PFN_vkUpdateDescriptorSetWithTemplate                  = void      function( VkDevice device, VkDescriptorSet descriptorSet, VkDescriptorUpdateTemplate descriptorUpdateTemplate, const( void )* pData );
+    alias PFN_vkGetPhysicalDeviceExternalBufferProperties        = void      function( VkPhysicalDevice physicalDevice, const( VkPhysicalDeviceExternalBufferInfo )* pExternalBufferInfo, VkExternalBufferProperties* pExternalBufferProperties );
+    alias PFN_vkGetPhysicalDeviceExternalFenceProperties         = void      function( VkPhysicalDevice physicalDevice, const( VkPhysicalDeviceExternalFenceInfo )* pExternalFenceInfo, VkExternalFenceProperties* pExternalFenceProperties );
+    alias PFN_vkGetPhysicalDeviceExternalSemaphoreProperties     = void      function( VkPhysicalDevice physicalDevice, const( VkPhysicalDeviceExternalSemaphoreInfo )* pExternalSemaphoreInfo, VkExternalSemaphoreProperties* pExternalSemaphoreProperties );
+    alias PFN_vkGetDescriptorSetLayoutSupport                    = void      function( VkDevice device, const( VkDescriptorSetLayoutCreateInfo )* pCreateInfo, VkDescriptorSetLayoutSupport* pSupport );
+
     // VK_KHR_surface
     alias PFN_vkDestroySurfaceKHR                                = void      function( VkInstance instance, VkSurfaceKHR surface, const( VkAllocationCallbacks )* pAllocator );
     alias PFN_vkGetPhysicalDeviceSurfaceSupportKHR               = VkResult  function( VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, VkSurfaceKHR surface, VkBool32* pSupported );
@@ -167,6 +197,10 @@ extern( System ) {
     alias PFN_vkGetSwapchainImagesKHR                            = VkResult  function( VkDevice device, VkSwapchainKHR swapchain, uint32_t* pSwapchainImageCount, VkImage* pSwapchainImages );
     alias PFN_vkAcquireNextImageKHR                              = VkResult  function( VkDevice device, VkSwapchainKHR swapchain, uint64_t timeout, VkSemaphore semaphore, VkFence fence, uint32_t* pImageIndex );
     alias PFN_vkQueuePresentKHR                                  = VkResult  function( VkQueue queue, const( VkPresentInfoKHR )* pPresentInfo );
+    alias PFN_vkGetDeviceGroupPresentCapabilitiesKHR             = VkResult  function( VkDevice device, VkDeviceGroupPresentCapabilitiesKHR* pDeviceGroupPresentCapabilities );
+    alias PFN_vkGetDeviceGroupSurfacePresentModesKHR             = VkResult  function( VkDevice device, VkSurfaceKHR surface, VkDeviceGroupPresentModeFlagsKHR* pModes );
+    alias PFN_vkGetPhysicalDevicePresentRectanglesKHR            = VkResult  function( VkPhysicalDevice physicalDevice, VkSurfaceKHR surface, uint32_t* pRectCount, VkRect2D* pRects );
+    alias PFN_vkAcquireNextImage2KHR                             = VkResult  function( VkDevice device, const( VkAcquireNextImageInfoKHR )* pAcquireInfo, uint32_t* pImageIndex );
 
     // VK_KHR_display
     alias PFN_vkGetPhysicalDeviceDisplayPropertiesKHR            = VkResult  function( VkPhysicalDevice physicalDevice, uint32_t* pPropertyCount, VkDisplayPropertiesKHR* pProperties );
@@ -180,27 +214,9 @@ extern( System ) {
     // VK_KHR_display_swapchain
     alias PFN_vkCreateSharedSwapchainsKHR                        = VkResult  function( VkDevice device, uint32_t swapchainCount, const( VkSwapchainCreateInfoKHR )* pCreateInfos, const( VkAllocationCallbacks )* pAllocator, VkSwapchainKHR* pSwapchains );
 
-    // VK_KHR_get_physical_device_properties2
-    alias PFN_vkGetPhysicalDeviceFeatures2KHR                    = void      function( VkPhysicalDevice physicalDevice, VkPhysicalDeviceFeatures2KHR* pFeatures );
-    alias PFN_vkGetPhysicalDeviceProperties2KHR                  = void      function( VkPhysicalDevice physicalDevice, VkPhysicalDeviceProperties2KHR* pProperties );
-    alias PFN_vkGetPhysicalDeviceFormatProperties2KHR            = void      function( VkPhysicalDevice physicalDevice, VkFormat format, VkFormatProperties2KHR* pFormatProperties );
-    alias PFN_vkGetPhysicalDeviceImageFormatProperties2KHR       = VkResult  function( VkPhysicalDevice physicalDevice, const( VkPhysicalDeviceImageFormatInfo2KHR )* pImageFormatInfo, VkImageFormatProperties2KHR* pImageFormatProperties );
-    alias PFN_vkGetPhysicalDeviceQueueFamilyProperties2KHR       = void      function( VkPhysicalDevice physicalDevice, uint32_t* pQueueFamilyPropertyCount, VkQueueFamilyProperties2KHR* pQueueFamilyProperties );
-    alias PFN_vkGetPhysicalDeviceMemoryProperties2KHR            = void      function( VkPhysicalDevice physicalDevice, VkPhysicalDeviceMemoryProperties2KHR* pMemoryProperties );
-    alias PFN_vkGetPhysicalDeviceSparseImageFormatProperties2KHR = void      function( VkPhysicalDevice physicalDevice, const( VkPhysicalDeviceSparseImageFormatInfo2KHR )* pFormatInfo, uint32_t* pPropertyCount, VkSparseImageFormatProperties2KHR* pProperties );
-
-    // VK_KHR_maintenance1
-    alias PFN_vkTrimCommandPoolKHR                               = void      function( VkDevice device, VkCommandPool commandPool, VkCommandPoolTrimFlagsKHR flags );
-
-    // VK_KHR_external_memory_capabilities
-    alias PFN_vkGetPhysicalDeviceExternalBufferPropertiesKHR     = void      function( VkPhysicalDevice physicalDevice, const( VkPhysicalDeviceExternalBufferInfoKHR )* pExternalBufferInfo, VkExternalBufferPropertiesKHR* pExternalBufferProperties );
-
     // VK_KHR_external_memory_fd
     alias PFN_vkGetMemoryFdKHR                                   = VkResult  function( VkDevice device, const( VkMemoryGetFdInfoKHR )* pGetFdInfo, int* pFd );
-    alias PFN_vkGetMemoryFdPropertiesKHR                         = VkResult  function( VkDevice device, VkExternalMemoryHandleTypeFlagBitsKHR handleType, int fd, VkMemoryFdPropertiesKHR* pMemoryFdProperties );
-
-    // VK_KHR_external_semaphore_capabilities
-    alias PFN_vkGetPhysicalDeviceExternalSemaphorePropertiesKHR  = void      function( VkPhysicalDevice physicalDevice, const( VkPhysicalDeviceExternalSemaphoreInfoKHR )* pExternalSemaphoreInfo, VkExternalSemaphorePropertiesKHR* pExternalSemaphoreProperties );
+    alias PFN_vkGetMemoryFdPropertiesKHR                         = VkResult  function( VkDevice device, VkExternalMemoryHandleTypeFlagBits handleType, int fd, VkMemoryFdPropertiesKHR* pMemoryFdProperties );
 
     // VK_KHR_external_semaphore_fd
     alias PFN_vkImportSemaphoreFdKHR                             = VkResult  function( VkDevice device, const( VkImportSemaphoreFdInfoKHR )* pImportSemaphoreFdInfo );
@@ -208,18 +224,10 @@ extern( System ) {
 
     // VK_KHR_push_descriptor
     alias PFN_vkCmdPushDescriptorSetKHR                          = void      function( VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t set, uint32_t descriptorWriteCount, const( VkWriteDescriptorSet )* pDescriptorWrites );
-
-    // VK_KHR_descriptor_update_template
-    alias PFN_vkCreateDescriptorUpdateTemplateKHR                = VkResult  function( VkDevice device, const( VkDescriptorUpdateTemplateCreateInfoKHR )* pCreateInfo, const( VkAllocationCallbacks )* pAllocator, VkDescriptorUpdateTemplateKHR* pDescriptorUpdateTemplate );
-    alias PFN_vkDestroyDescriptorUpdateTemplateKHR               = void      function( VkDevice device, VkDescriptorUpdateTemplateKHR descriptorUpdateTemplate, const( VkAllocationCallbacks )* pAllocator );
-    alias PFN_vkUpdateDescriptorSetWithTemplateKHR               = void      function( VkDevice device, VkDescriptorSet descriptorSet, VkDescriptorUpdateTemplateKHR descriptorUpdateTemplate, const( void )* pData );
-    alias PFN_vkCmdPushDescriptorSetWithTemplateKHR              = void      function( VkCommandBuffer commandBuffer, VkDescriptorUpdateTemplateKHR descriptorUpdateTemplate, VkPipelineLayout layout, uint32_t set, const( void )* pData );
+    alias PFN_vkCmdPushDescriptorSetWithTemplateKHR              = void      function( VkCommandBuffer commandBuffer, VkDescriptorUpdateTemplate descriptorUpdateTemplate, VkPipelineLayout layout, uint32_t set, const( void )* pData );
 
     // VK_KHR_shared_presentable_image
     alias PFN_vkGetSwapchainStatusKHR                            = VkResult  function( VkDevice device, VkSwapchainKHR swapchain );
-
-    // VK_KHR_external_fence_capabilities
-    alias PFN_vkGetPhysicalDeviceExternalFencePropertiesKHR      = void      function( VkPhysicalDevice physicalDevice, const( VkPhysicalDeviceExternalFenceInfoKHR )* pExternalFenceInfo, VkExternalFencePropertiesKHR* pExternalFenceProperties );
 
     // VK_KHR_external_fence_fd
     alias PFN_vkImportFenceFdKHR                                 = VkResult  function( VkDevice device, const( VkImportFenceFdInfoKHR )* pImportFenceFdInfo );
@@ -228,24 +236,6 @@ extern( System ) {
     // VK_KHR_get_surface_capabilities2
     alias PFN_vkGetPhysicalDeviceSurfaceCapabilities2KHR         = VkResult  function( VkPhysicalDevice physicalDevice, const( VkPhysicalDeviceSurfaceInfo2KHR )* pSurfaceInfo, VkSurfaceCapabilities2KHR* pSurfaceCapabilities );
     alias PFN_vkGetPhysicalDeviceSurfaceFormats2KHR              = VkResult  function( VkPhysicalDevice physicalDevice, const( VkPhysicalDeviceSurfaceInfo2KHR )* pSurfaceInfo, uint32_t* pSurfaceFormatCount, VkSurfaceFormat2KHR* pSurfaceFormats );
-
-    // VK_KHR_get_memory_requirements2
-    alias PFN_vkGetImageMemoryRequirements2KHR                   = void      function( VkDevice device, const( VkImageMemoryRequirementsInfo2KHR )* pInfo, VkMemoryRequirements2KHR* pMemoryRequirements );
-    alias PFN_vkGetBufferMemoryRequirements2KHR                  = void      function( VkDevice device, const( VkBufferMemoryRequirementsInfo2KHR )* pInfo, VkMemoryRequirements2KHR* pMemoryRequirements );
-    alias PFN_vkGetImageSparseMemoryRequirements2KHR             = void      function( VkDevice device, const( VkImageSparseMemoryRequirementsInfo2KHR )* pInfo, uint32_t* pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2KHR* pSparseMemoryRequirements );
-
-    // VK_KHR_sampler_ycbcr_conversion
-    alias PFN_vkCreateSamplerYcbcrConversionKHR                  = VkResult  function( VkDevice device, const( VkSamplerYcbcrConversionCreateInfoKHR )* pCreateInfo, const( VkAllocationCallbacks )* pAllocator, VkSamplerYcbcrConversionKHR* pYcbcrConversion );
-    alias PFN_vkDestroySamplerYcbcrConversionKHR                 = void      function( VkDevice device, VkSamplerYcbcrConversionKHR ycbcrConversion, const( VkAllocationCallbacks )* pAllocator );
-
-    // VK_KHR_bind_memory2
-    alias PFN_vkBindBufferMemory2KHR                             = VkResult  function( VkDevice device, uint32_t bindInfoCount, const( VkBindBufferMemoryInfoKHR )* pBindInfos );
-    alias PFN_vkBindImageMemory2KHR                              = VkResult  function( VkDevice device, uint32_t bindInfoCount, const( VkBindImageMemoryInfoKHR )* pBindInfos );
-
-    // VK_ANDROID_native_buffer
-    alias PFN_vkGetSwapchainGrallocUsageANDROID                  = VkResult  function( VkDevice device, VkFormat format, VkImageUsageFlags imageUsage, int* grallocUsage );
-    alias PFN_vkAcquireImageANDROID                              = VkResult  function( VkDevice device, VkImage image, int nativeFenceFd, VkSemaphore semaphore, VkFence fence );
-    alias PFN_vkQueueSignalReleaseImageANDROID                   = VkResult  function( VkQueue queue, uint32_t waitSemaphoreCount, const( VkSemaphore )* pWaitSemaphores, VkImage image, int* pNativeFenceFd );
 
     // VK_EXT_debug_report
     alias PFN_vkCreateDebugReportCallbackEXT                     = VkResult  function( VkInstance instance, const( VkDebugReportCallbackCreateInfoEXT )* pCreateInfo, const( VkAllocationCallbacks )* pAllocator, VkDebugReportCallbackEXT* pCallback );
@@ -268,18 +258,6 @@ extern( System ) {
 
     // VK_NV_external_memory_capabilities
     alias PFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV = VkResult  function( VkPhysicalDevice physicalDevice, VkFormat format, VkImageType type, VkImageTiling tiling, VkImageUsageFlags usage, VkImageCreateFlags flags, VkExternalMemoryHandleTypeFlagsNV externalHandleType, VkExternalImageFormatPropertiesNV* pExternalImageFormatProperties );
-
-    // VK_KHX_device_group
-    alias PFN_vkGetDeviceGroupPeerMemoryFeaturesKHX              = void      function( VkDevice device, uint32_t heapIndex, uint32_t localDeviceIndex, uint32_t remoteDeviceIndex, VkPeerMemoryFeatureFlagsKHX* pPeerMemoryFeatures );
-    alias PFN_vkCmdSetDeviceMaskKHX                              = void      function( VkCommandBuffer commandBuffer, uint32_t deviceMask );
-    alias PFN_vkCmdDispatchBaseKHX                               = void      function( VkCommandBuffer commandBuffer, uint32_t baseGroupX, uint32_t baseGroupY, uint32_t baseGroupZ, uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ );
-    alias PFN_vkGetDeviceGroupPresentCapabilitiesKHX             = VkResult  function( VkDevice device, VkDeviceGroupPresentCapabilitiesKHX* pDeviceGroupPresentCapabilities );
-    alias PFN_vkGetDeviceGroupSurfacePresentModesKHX             = VkResult  function( VkDevice device, VkSurfaceKHR surface, VkDeviceGroupPresentModeFlagsKHX* pModes );
-    alias PFN_vkGetPhysicalDevicePresentRectanglesKHX            = VkResult  function( VkPhysicalDevice physicalDevice, VkSurfaceKHR surface, uint32_t* pRectCount, VkRect2D* pRects );
-    alias PFN_vkAcquireNextImage2KHX                             = VkResult  function( VkDevice device, const( VkAcquireNextImageInfoKHX )* pAcquireInfo, uint32_t* pImageIndex );
-
-    // VK_KHX_device_group_creation
-    alias PFN_vkEnumeratePhysicalDeviceGroupsKHX                 = VkResult  function( VkInstance instance, uint32_t* pPhysicalDeviceGroupCount, VkPhysicalDeviceGroupPropertiesKHX* pPhysicalDeviceGroupProperties );
 
     // VK_NVX_device_generated_commands
     alias PFN_vkCmdProcessCommandsNVX                            = void      function( VkCommandBuffer commandBuffer, const( VkCmdProcessCommandsInfoNVX )* pProcessCommandsInfo );
@@ -317,6 +295,19 @@ extern( System ) {
     // VK_EXT_hdr_metadata
     alias PFN_vkSetHdrMetadataEXT                                = void      function( VkDevice device, uint32_t swapchainCount, const( VkSwapchainKHR )* pSwapchains, const( VkHdrMetadataEXT )* pMetadata );
 
+    // VK_EXT_debug_utils
+    alias PFN_vkSetDebugUtilsObjectNameEXT                       = VkResult  function( VkDevice device, const( VkDebugUtilsObjectNameInfoEXT )* pNameInfo );
+    alias PFN_vkSetDebugUtilsObjectTagEXT                        = VkResult  function( VkDevice device, const( VkDebugUtilsObjectTagInfoEXT )* pTagInfo );
+    alias PFN_vkQueueBeginDebugUtilsLabelEXT                     = void      function( VkQueue queue, const( VkDebugUtilsLabelEXT )* pLabelInfo );
+    alias PFN_vkQueueEndDebugUtilsLabelEXT                       = void      function( VkQueue queue );
+    alias PFN_vkQueueInsertDebugUtilsLabelEXT                    = void      function( VkQueue queue, const( VkDebugUtilsLabelEXT )* pLabelInfo );
+    alias PFN_vkCmdBeginDebugUtilsLabelEXT                       = void      function( VkCommandBuffer commandBuffer, const( VkDebugUtilsLabelEXT )* pLabelInfo );
+    alias PFN_vkCmdEndDebugUtilsLabelEXT                         = void      function( VkCommandBuffer commandBuffer );
+    alias PFN_vkCmdInsertDebugUtilsLabelEXT                      = void      function( VkCommandBuffer commandBuffer, const( VkDebugUtilsLabelEXT )* pLabelInfo );
+    alias PFN_vkCreateDebugUtilsMessengerEXT                     = VkResult  function( VkInstance instance, const( VkDebugUtilsMessengerCreateInfoEXT )* pCreateInfo, const( VkAllocationCallbacks )* pAllocator, VkDebugUtilsMessengerEXT* pMessenger );
+    alias PFN_vkDestroyDebugUtilsMessengerEXT                    = void      function( VkInstance instance, VkDebugUtilsMessengerEXT messenger, const( VkAllocationCallbacks )* pAllocator );
+    alias PFN_vkSubmitDebugUtilsMessageEXT                       = void      function( VkInstance instance, VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageTypes, const( VkDebugUtilsMessengerCallbackDataEXT )* pCallbackData );
+
     // VK_EXT_sample_locations
     alias PFN_vkCmdSetSampleLocationsEXT                         = void      function( VkCommandBuffer commandBuffer, const( VkSampleLocationsInfoEXT )* pSampleLocationsInfo );
     alias PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT        = void      function( VkPhysicalDevice physicalDevice, VkSampleCountFlagBits samples, VkMultisamplePropertiesEXT* pMultisampleProperties );
@@ -328,7 +319,7 @@ extern( System ) {
     alias PFN_vkGetValidationCacheDataEXT                        = VkResult  function( VkDevice device, VkValidationCacheEXT validationCache, size_t* pDataSize, void* pData );
 
     // VK_EXT_external_memory_host
-    alias PFN_vkGetMemoryHostPointerPropertiesEXT                = VkResult  function( VkDevice device, VkExternalMemoryHandleTypeFlagBitsKHR handleType, const( void )* pHostPointer, VkMemoryHostPointerPropertiesEXT* pMemoryHostPointerProperties );
+    alias PFN_vkGetMemoryHostPointerPropertiesEXT                = VkResult  function( VkDevice device, VkExternalMemoryHandleTypeFlagBits handleType, const( void )* pHostPointer, VkMemoryHostPointerPropertiesEXT* pMemoryHostPointerProperties );
 
     // VK_AMD_buffer_marker
     alias PFN_vkCmdWriteBufferMarkerAMD                          = void      function( VkCommandBuffer commandBuffer, VkPipelineStageFlagBits pipelineStage, VkBuffer dstBuffer, VkDeviceSize dstOffset, uint32_t marker );
@@ -477,6 +468,36 @@ __gshared {
     PFN_vkCmdEndRenderPass                                 vkCmdEndRenderPass;
     PFN_vkCmdExecuteCommands                               vkCmdExecuteCommands;
 
+    // VK_VERSION_1_1
+    PFN_vkEnumerateInstanceVersion                         vkEnumerateInstanceVersion;
+    PFN_vkBindBufferMemory2                                vkBindBufferMemory2;
+    PFN_vkBindImageMemory2                                 vkBindImageMemory2;
+    PFN_vkGetDeviceGroupPeerMemoryFeatures                 vkGetDeviceGroupPeerMemoryFeatures;
+    PFN_vkCmdSetDeviceMask                                 vkCmdSetDeviceMask;
+    PFN_vkCmdDispatchBase                                  vkCmdDispatchBase;
+    PFN_vkEnumeratePhysicalDeviceGroups                    vkEnumeratePhysicalDeviceGroups;
+    PFN_vkGetImageMemoryRequirements2                      vkGetImageMemoryRequirements2;
+    PFN_vkGetBufferMemoryRequirements2                     vkGetBufferMemoryRequirements2;
+    PFN_vkGetImageSparseMemoryRequirements2                vkGetImageSparseMemoryRequirements2;
+    PFN_vkGetPhysicalDeviceFeatures2                       vkGetPhysicalDeviceFeatures2;
+    PFN_vkGetPhysicalDeviceProperties2                     vkGetPhysicalDeviceProperties2;
+    PFN_vkGetPhysicalDeviceFormatProperties2               vkGetPhysicalDeviceFormatProperties2;
+    PFN_vkGetPhysicalDeviceImageFormatProperties2          vkGetPhysicalDeviceImageFormatProperties2;
+    PFN_vkGetPhysicalDeviceQueueFamilyProperties2          vkGetPhysicalDeviceQueueFamilyProperties2;
+    PFN_vkGetPhysicalDeviceMemoryProperties2               vkGetPhysicalDeviceMemoryProperties2;
+    PFN_vkGetPhysicalDeviceSparseImageFormatProperties2    vkGetPhysicalDeviceSparseImageFormatProperties2;
+    PFN_vkTrimCommandPool                                  vkTrimCommandPool;
+    PFN_vkGetDeviceQueue2                                  vkGetDeviceQueue2;
+    PFN_vkCreateSamplerYcbcrConversion                     vkCreateSamplerYcbcrConversion;
+    PFN_vkDestroySamplerYcbcrConversion                    vkDestroySamplerYcbcrConversion;
+    PFN_vkCreateDescriptorUpdateTemplate                   vkCreateDescriptorUpdateTemplate;
+    PFN_vkDestroyDescriptorUpdateTemplate                  vkDestroyDescriptorUpdateTemplate;
+    PFN_vkUpdateDescriptorSetWithTemplate                  vkUpdateDescriptorSetWithTemplate;
+    PFN_vkGetPhysicalDeviceExternalBufferProperties        vkGetPhysicalDeviceExternalBufferProperties;
+    PFN_vkGetPhysicalDeviceExternalFenceProperties         vkGetPhysicalDeviceExternalFenceProperties;
+    PFN_vkGetPhysicalDeviceExternalSemaphoreProperties     vkGetPhysicalDeviceExternalSemaphoreProperties;
+    PFN_vkGetDescriptorSetLayoutSupport                    vkGetDescriptorSetLayoutSupport;
+
     // VK_KHR_surface
     PFN_vkDestroySurfaceKHR                                vkDestroySurfaceKHR;
     PFN_vkGetPhysicalDeviceSurfaceSupportKHR               vkGetPhysicalDeviceSurfaceSupportKHR;
@@ -490,6 +511,10 @@ __gshared {
     PFN_vkGetSwapchainImagesKHR                            vkGetSwapchainImagesKHR;
     PFN_vkAcquireNextImageKHR                              vkAcquireNextImageKHR;
     PFN_vkQueuePresentKHR                                  vkQueuePresentKHR;
+    PFN_vkGetDeviceGroupPresentCapabilitiesKHR             vkGetDeviceGroupPresentCapabilitiesKHR;
+    PFN_vkGetDeviceGroupSurfacePresentModesKHR             vkGetDeviceGroupSurfacePresentModesKHR;
+    PFN_vkGetPhysicalDevicePresentRectanglesKHR            vkGetPhysicalDevicePresentRectanglesKHR;
+    PFN_vkAcquireNextImage2KHR                             vkAcquireNextImage2KHR;
 
     // VK_KHR_display
     PFN_vkGetPhysicalDeviceDisplayPropertiesKHR            vkGetPhysicalDeviceDisplayPropertiesKHR;
@@ -503,27 +528,9 @@ __gshared {
     // VK_KHR_display_swapchain
     PFN_vkCreateSharedSwapchainsKHR                        vkCreateSharedSwapchainsKHR;
 
-    // VK_KHR_get_physical_device_properties2
-    PFN_vkGetPhysicalDeviceFeatures2KHR                    vkGetPhysicalDeviceFeatures2KHR;
-    PFN_vkGetPhysicalDeviceProperties2KHR                  vkGetPhysicalDeviceProperties2KHR;
-    PFN_vkGetPhysicalDeviceFormatProperties2KHR            vkGetPhysicalDeviceFormatProperties2KHR;
-    PFN_vkGetPhysicalDeviceImageFormatProperties2KHR       vkGetPhysicalDeviceImageFormatProperties2KHR;
-    PFN_vkGetPhysicalDeviceQueueFamilyProperties2KHR       vkGetPhysicalDeviceQueueFamilyProperties2KHR;
-    PFN_vkGetPhysicalDeviceMemoryProperties2KHR            vkGetPhysicalDeviceMemoryProperties2KHR;
-    PFN_vkGetPhysicalDeviceSparseImageFormatProperties2KHR vkGetPhysicalDeviceSparseImageFormatProperties2KHR;
-
-    // VK_KHR_maintenance1
-    PFN_vkTrimCommandPoolKHR                               vkTrimCommandPoolKHR;
-
-    // VK_KHR_external_memory_capabilities
-    PFN_vkGetPhysicalDeviceExternalBufferPropertiesKHR     vkGetPhysicalDeviceExternalBufferPropertiesKHR;
-
     // VK_KHR_external_memory_fd
     PFN_vkGetMemoryFdKHR                                   vkGetMemoryFdKHR;
     PFN_vkGetMemoryFdPropertiesKHR                         vkGetMemoryFdPropertiesKHR;
-
-    // VK_KHR_external_semaphore_capabilities
-    PFN_vkGetPhysicalDeviceExternalSemaphorePropertiesKHR  vkGetPhysicalDeviceExternalSemaphorePropertiesKHR;
 
     // VK_KHR_external_semaphore_fd
     PFN_vkImportSemaphoreFdKHR                             vkImportSemaphoreFdKHR;
@@ -531,18 +538,10 @@ __gshared {
 
     // VK_KHR_push_descriptor
     PFN_vkCmdPushDescriptorSetKHR                          vkCmdPushDescriptorSetKHR;
-
-    // VK_KHR_descriptor_update_template
-    PFN_vkCreateDescriptorUpdateTemplateKHR                vkCreateDescriptorUpdateTemplateKHR;
-    PFN_vkDestroyDescriptorUpdateTemplateKHR               vkDestroyDescriptorUpdateTemplateKHR;
-    PFN_vkUpdateDescriptorSetWithTemplateKHR               vkUpdateDescriptorSetWithTemplateKHR;
     PFN_vkCmdPushDescriptorSetWithTemplateKHR              vkCmdPushDescriptorSetWithTemplateKHR;
 
     // VK_KHR_shared_presentable_image
     PFN_vkGetSwapchainStatusKHR                            vkGetSwapchainStatusKHR;
-
-    // VK_KHR_external_fence_capabilities
-    PFN_vkGetPhysicalDeviceExternalFencePropertiesKHR      vkGetPhysicalDeviceExternalFencePropertiesKHR;
 
     // VK_KHR_external_fence_fd
     PFN_vkImportFenceFdKHR                                 vkImportFenceFdKHR;
@@ -551,24 +550,6 @@ __gshared {
     // VK_KHR_get_surface_capabilities2
     PFN_vkGetPhysicalDeviceSurfaceCapabilities2KHR         vkGetPhysicalDeviceSurfaceCapabilities2KHR;
     PFN_vkGetPhysicalDeviceSurfaceFormats2KHR              vkGetPhysicalDeviceSurfaceFormats2KHR;
-
-    // VK_KHR_get_memory_requirements2
-    PFN_vkGetImageMemoryRequirements2KHR                   vkGetImageMemoryRequirements2KHR;
-    PFN_vkGetBufferMemoryRequirements2KHR                  vkGetBufferMemoryRequirements2KHR;
-    PFN_vkGetImageSparseMemoryRequirements2KHR             vkGetImageSparseMemoryRequirements2KHR;
-
-    // VK_KHR_sampler_ycbcr_conversion
-    PFN_vkCreateSamplerYcbcrConversionKHR                  vkCreateSamplerYcbcrConversionKHR;
-    PFN_vkDestroySamplerYcbcrConversionKHR                 vkDestroySamplerYcbcrConversionKHR;
-
-    // VK_KHR_bind_memory2
-    PFN_vkBindBufferMemory2KHR                             vkBindBufferMemory2KHR;
-    PFN_vkBindImageMemory2KHR                              vkBindImageMemory2KHR;
-
-    // VK_ANDROID_native_buffer
-    PFN_vkGetSwapchainGrallocUsageANDROID                  vkGetSwapchainGrallocUsageANDROID;
-    PFN_vkAcquireImageANDROID                              vkAcquireImageANDROID;
-    PFN_vkQueueSignalReleaseImageANDROID                   vkQueueSignalReleaseImageANDROID;
 
     // VK_EXT_debug_report
     PFN_vkCreateDebugReportCallbackEXT                     vkCreateDebugReportCallbackEXT;
@@ -591,18 +572,6 @@ __gshared {
 
     // VK_NV_external_memory_capabilities
     PFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV vkGetPhysicalDeviceExternalImageFormatPropertiesNV;
-
-    // VK_KHX_device_group
-    PFN_vkGetDeviceGroupPeerMemoryFeaturesKHX              vkGetDeviceGroupPeerMemoryFeaturesKHX;
-    PFN_vkCmdSetDeviceMaskKHX                              vkCmdSetDeviceMaskKHX;
-    PFN_vkCmdDispatchBaseKHX                               vkCmdDispatchBaseKHX;
-    PFN_vkGetDeviceGroupPresentCapabilitiesKHX             vkGetDeviceGroupPresentCapabilitiesKHX;
-    PFN_vkGetDeviceGroupSurfacePresentModesKHX             vkGetDeviceGroupSurfacePresentModesKHX;
-    PFN_vkGetPhysicalDevicePresentRectanglesKHX            vkGetPhysicalDevicePresentRectanglesKHX;
-    PFN_vkAcquireNextImage2KHX                             vkAcquireNextImage2KHX;
-
-    // VK_KHX_device_group_creation
-    PFN_vkEnumeratePhysicalDeviceGroupsKHX                 vkEnumeratePhysicalDeviceGroupsKHX;
 
     // VK_NVX_device_generated_commands
     PFN_vkCmdProcessCommandsNVX                            vkCmdProcessCommandsNVX;
@@ -640,6 +609,19 @@ __gshared {
     // VK_EXT_hdr_metadata
     PFN_vkSetHdrMetadataEXT                                vkSetHdrMetadataEXT;
 
+    // VK_EXT_debug_utils
+    PFN_vkSetDebugUtilsObjectNameEXT                       vkSetDebugUtilsObjectNameEXT;
+    PFN_vkSetDebugUtilsObjectTagEXT                        vkSetDebugUtilsObjectTagEXT;
+    PFN_vkQueueBeginDebugUtilsLabelEXT                     vkQueueBeginDebugUtilsLabelEXT;
+    PFN_vkQueueEndDebugUtilsLabelEXT                       vkQueueEndDebugUtilsLabelEXT;
+    PFN_vkQueueInsertDebugUtilsLabelEXT                    vkQueueInsertDebugUtilsLabelEXT;
+    PFN_vkCmdBeginDebugUtilsLabelEXT                       vkCmdBeginDebugUtilsLabelEXT;
+    PFN_vkCmdEndDebugUtilsLabelEXT                         vkCmdEndDebugUtilsLabelEXT;
+    PFN_vkCmdInsertDebugUtilsLabelEXT                      vkCmdInsertDebugUtilsLabelEXT;
+    PFN_vkCreateDebugUtilsMessengerEXT                     vkCreateDebugUtilsMessengerEXT;
+    PFN_vkDestroyDebugUtilsMessengerEXT                    vkDestroyDebugUtilsMessengerEXT;
+    PFN_vkSubmitDebugUtilsMessageEXT                       vkSubmitDebugUtilsMessageEXT;
+
     // VK_EXT_sample_locations
     PFN_vkCmdSetSampleLocationsEXT                         vkCmdSetSampleLocationsEXT;
     PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT        vkGetPhysicalDeviceMultisamplePropertiesEXT;
@@ -655,22 +637,77 @@ __gshared {
 
     // VK_AMD_buffer_marker
     PFN_vkCmdWriteBufferMarkerAMD                          vkCmdWriteBufferMarkerAMD;
+
+    // VK_KHR_get_physical_device_properties2
+    alias vkGetPhysicalDeviceFeatures2KHR                          = vkGetPhysicalDeviceFeatures2;
+    alias vkGetPhysicalDeviceProperties2KHR                        = vkGetPhysicalDeviceProperties2;
+    alias vkGetPhysicalDeviceFormatProperties2KHR                  = vkGetPhysicalDeviceFormatProperties2;
+    alias vkGetPhysicalDeviceImageFormatProperties2KHR             = vkGetPhysicalDeviceImageFormatProperties2;
+    alias vkGetPhysicalDeviceQueueFamilyProperties2KHR             = vkGetPhysicalDeviceQueueFamilyProperties2;
+    alias vkGetPhysicalDeviceMemoryProperties2KHR                  = vkGetPhysicalDeviceMemoryProperties2;
+    alias vkGetPhysicalDeviceSparseImageFormatProperties2KHR       = vkGetPhysicalDeviceSparseImageFormatProperties2;
+
+    // VK_KHR_device_group
+    alias vkGetDeviceGroupPeerMemoryFeaturesKHR                    = vkGetDeviceGroupPeerMemoryFeatures;
+    alias vkCmdSetDeviceMaskKHR                                    = vkCmdSetDeviceMask;
+    alias vkCmdDispatchBaseKHR                                     = vkCmdDispatchBase;
+
+    // VK_KHR_maintenance1
+    alias vkTrimCommandPoolKHR                                     = vkTrimCommandPool;
+
+    // VK_KHR_device_group_creation
+    alias vkEnumeratePhysicalDeviceGroupsKHR                       = vkEnumeratePhysicalDeviceGroups;
+
+    // VK_KHR_external_memory_capabilities
+    alias vkGetPhysicalDeviceExternalBufferPropertiesKHR           = vkGetPhysicalDeviceExternalBufferProperties;
+
+    // VK_KHR_external_semaphore_capabilities
+    alias vkGetPhysicalDeviceExternalSemaphorePropertiesKHR        = vkGetPhysicalDeviceExternalSemaphoreProperties;
+
+    // VK_KHR_descriptor_update_template
+    alias vkCreateDescriptorUpdateTemplateKHR                      = vkCreateDescriptorUpdateTemplate;
+    alias vkDestroyDescriptorUpdateTemplateKHR                     = vkDestroyDescriptorUpdateTemplate;
+    alias vkUpdateDescriptorSetWithTemplateKHR                     = vkUpdateDescriptorSetWithTemplate;
+
+    // VK_KHR_external_fence_capabilities
+    alias vkGetPhysicalDeviceExternalFencePropertiesKHR            = vkGetPhysicalDeviceExternalFenceProperties;
+
+    // VK_KHR_get_memory_requirements2
+    alias vkGetImageMemoryRequirements2KHR                         = vkGetImageMemoryRequirements2;
+    alias vkGetBufferMemoryRequirements2KHR                        = vkGetBufferMemoryRequirements2;
+    alias vkGetImageSparseMemoryRequirements2KHR                   = vkGetImageSparseMemoryRequirements2;
+
+    // VK_KHR_sampler_ycbcr_conversion
+    alias vkCreateSamplerYcbcrConversionKHR                        = vkCreateSamplerYcbcrConversion;
+    alias vkDestroySamplerYcbcrConversionKHR                       = vkDestroySamplerYcbcrConversion;
+
+    // VK_KHR_bind_memory2
+    alias vkBindBufferMemory2KHR                                   = vkBindBufferMemory2;
+    alias vkBindImageMemory2KHR                                    = vkBindImageMemory2;
+
+    // VK_KHR_maintenance3
+    alias vkGetDescriptorSetLayoutSupportKHR                       = vkGetDescriptorSetLayoutSupport;
 }
 
 
 /// sets vkCreateInstance function pointer and acquires basic functions to retrieve information about the implementation
 /// and create an instance: vkEnumerateInstanceExtensionProperties, vkEnumerateInstanceLayerProperties, vkCreateInstance
 void loadGlobalLevelFunctions( PFN_vkGetInstanceProcAddr getInstanceProcAddr ) {
-    vkGetInstanceProcAddr                  = getInstanceProcAddr;
+    vkGetInstanceProcAddr = getInstanceProcAddr;
+
+    // VK_VERSION_1_0
+    vkCreateInstance                       = cast( PFN_vkCreateInstance                       ) vkGetInstanceProcAddr( null, "vkCreateInstance" );
     vkEnumerateInstanceExtensionProperties = cast( PFN_vkEnumerateInstanceExtensionProperties ) vkGetInstanceProcAddr( null, "vkEnumerateInstanceExtensionProperties" );
     vkEnumerateInstanceLayerProperties     = cast( PFN_vkEnumerateInstanceLayerProperties     ) vkGetInstanceProcAddr( null, "vkEnumerateInstanceLayerProperties" );
-    vkCreateInstance                       = cast( PFN_vkCreateInstance                       ) vkGetInstanceProcAddr( null, "vkCreateInstance" );
+
+    // VK_VERSION_1_1
+    vkEnumerateInstanceVersion             = cast( PFN_vkEnumerateInstanceVersion             ) vkGetInstanceProcAddr( null, "vkEnumerateInstanceVersion" );
 }
 
 
 /// with a valid VkInstance call this function to retrieve additional VkInstance, VkPhysicalDevice, ... related functions
 void loadInstanceLevelFunctions( VkInstance instance ) {
-    assert( vkGetInstanceProcAddr !is null, "Must call loadGlobalLevelFunctions before loadInstanceLevelFunctions" );
+    assert( vkGetInstanceProcAddr !is null, "Function pointer vkGetInstanceProcAddr is null!\nCall loadGlobalLevelFunctions -> loadInstanceLevelFunctions" );
 
     // VK_VERSION_1_0
     vkDestroyInstance                                  = cast( PFN_vkDestroyInstance                                  ) vkGetInstanceProcAddr( instance, "vkDestroyInstance" );
@@ -687,12 +724,28 @@ void loadInstanceLevelFunctions( VkInstance instance ) {
     vkEnumerateDeviceLayerProperties                   = cast( PFN_vkEnumerateDeviceLayerProperties                   ) vkGetInstanceProcAddr( instance, "vkEnumerateDeviceLayerProperties" );
     vkGetPhysicalDeviceSparseImageFormatProperties     = cast( PFN_vkGetPhysicalDeviceSparseImageFormatProperties     ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceSparseImageFormatProperties" );
 
+    // VK_VERSION_1_1
+    vkEnumeratePhysicalDeviceGroups                    = cast( PFN_vkEnumeratePhysicalDeviceGroups                    ) vkGetInstanceProcAddr( instance, "vkEnumeratePhysicalDeviceGroups" );
+    vkGetPhysicalDeviceFeatures2                       = cast( PFN_vkGetPhysicalDeviceFeatures2                       ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceFeatures2" );
+    vkGetPhysicalDeviceProperties2                     = cast( PFN_vkGetPhysicalDeviceProperties2                     ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceProperties2" );
+    vkGetPhysicalDeviceFormatProperties2               = cast( PFN_vkGetPhysicalDeviceFormatProperties2               ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceFormatProperties2" );
+    vkGetPhysicalDeviceImageFormatProperties2          = cast( PFN_vkGetPhysicalDeviceImageFormatProperties2          ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceImageFormatProperties2" );
+    vkGetPhysicalDeviceQueueFamilyProperties2          = cast( PFN_vkGetPhysicalDeviceQueueFamilyProperties2          ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceQueueFamilyProperties2" );
+    vkGetPhysicalDeviceMemoryProperties2               = cast( PFN_vkGetPhysicalDeviceMemoryProperties2               ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceMemoryProperties2" );
+    vkGetPhysicalDeviceSparseImageFormatProperties2    = cast( PFN_vkGetPhysicalDeviceSparseImageFormatProperties2    ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceSparseImageFormatProperties2" );
+    vkGetPhysicalDeviceExternalBufferProperties        = cast( PFN_vkGetPhysicalDeviceExternalBufferProperties        ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceExternalBufferProperties" );
+    vkGetPhysicalDeviceExternalFenceProperties         = cast( PFN_vkGetPhysicalDeviceExternalFenceProperties         ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceExternalFenceProperties" );
+    vkGetPhysicalDeviceExternalSemaphoreProperties     = cast( PFN_vkGetPhysicalDeviceExternalSemaphoreProperties     ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceExternalSemaphoreProperties" );
+
     // VK_KHR_surface
     vkDestroySurfaceKHR                                = cast( PFN_vkDestroySurfaceKHR                                ) vkGetInstanceProcAddr( instance, "vkDestroySurfaceKHR" );
     vkGetPhysicalDeviceSurfaceSupportKHR               = cast( PFN_vkGetPhysicalDeviceSurfaceSupportKHR               ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceSurfaceSupportKHR" );
     vkGetPhysicalDeviceSurfaceCapabilitiesKHR          = cast( PFN_vkGetPhysicalDeviceSurfaceCapabilitiesKHR          ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceSurfaceCapabilitiesKHR" );
     vkGetPhysicalDeviceSurfaceFormatsKHR               = cast( PFN_vkGetPhysicalDeviceSurfaceFormatsKHR               ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceSurfaceFormatsKHR" );
     vkGetPhysicalDeviceSurfacePresentModesKHR          = cast( PFN_vkGetPhysicalDeviceSurfacePresentModesKHR          ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceSurfacePresentModesKHR" );
+
+    // VK_KHR_swapchain
+    vkGetPhysicalDevicePresentRectanglesKHR            = cast( PFN_vkGetPhysicalDevicePresentRectanglesKHR            ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDevicePresentRectanglesKHR" );
 
     // VK_KHR_display
     vkGetPhysicalDeviceDisplayPropertiesKHR            = cast( PFN_vkGetPhysicalDeviceDisplayPropertiesKHR            ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceDisplayPropertiesKHR" );
@@ -702,24 +755,6 @@ void loadInstanceLevelFunctions( VkInstance instance ) {
     vkCreateDisplayModeKHR                             = cast( PFN_vkCreateDisplayModeKHR                             ) vkGetInstanceProcAddr( instance, "vkCreateDisplayModeKHR" );
     vkGetDisplayPlaneCapabilitiesKHR                   = cast( PFN_vkGetDisplayPlaneCapabilitiesKHR                   ) vkGetInstanceProcAddr( instance, "vkGetDisplayPlaneCapabilitiesKHR" );
     vkCreateDisplayPlaneSurfaceKHR                     = cast( PFN_vkCreateDisplayPlaneSurfaceKHR                     ) vkGetInstanceProcAddr( instance, "vkCreateDisplayPlaneSurfaceKHR" );
-
-    // VK_KHR_get_physical_device_properties2
-    vkGetPhysicalDeviceFeatures2KHR                    = cast( PFN_vkGetPhysicalDeviceFeatures2KHR                    ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceFeatures2KHR" );
-    vkGetPhysicalDeviceProperties2KHR                  = cast( PFN_vkGetPhysicalDeviceProperties2KHR                  ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceProperties2KHR" );
-    vkGetPhysicalDeviceFormatProperties2KHR            = cast( PFN_vkGetPhysicalDeviceFormatProperties2KHR            ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceFormatProperties2KHR" );
-    vkGetPhysicalDeviceImageFormatProperties2KHR       = cast( PFN_vkGetPhysicalDeviceImageFormatProperties2KHR       ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceImageFormatProperties2KHR" );
-    vkGetPhysicalDeviceQueueFamilyProperties2KHR       = cast( PFN_vkGetPhysicalDeviceQueueFamilyProperties2KHR       ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceQueueFamilyProperties2KHR" );
-    vkGetPhysicalDeviceMemoryProperties2KHR            = cast( PFN_vkGetPhysicalDeviceMemoryProperties2KHR            ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceMemoryProperties2KHR" );
-    vkGetPhysicalDeviceSparseImageFormatProperties2KHR = cast( PFN_vkGetPhysicalDeviceSparseImageFormatProperties2KHR ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceSparseImageFormatProperties2KHR" );
-
-    // VK_KHR_external_memory_capabilities
-    vkGetPhysicalDeviceExternalBufferPropertiesKHR     = cast( PFN_vkGetPhysicalDeviceExternalBufferPropertiesKHR     ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceExternalBufferPropertiesKHR" );
-
-    // VK_KHR_external_semaphore_capabilities
-    vkGetPhysicalDeviceExternalSemaphorePropertiesKHR  = cast( PFN_vkGetPhysicalDeviceExternalSemaphorePropertiesKHR  ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceExternalSemaphorePropertiesKHR" );
-
-    // VK_KHR_external_fence_capabilities
-    vkGetPhysicalDeviceExternalFencePropertiesKHR      = cast( PFN_vkGetPhysicalDeviceExternalFencePropertiesKHR      ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceExternalFencePropertiesKHR" );
 
     // VK_KHR_get_surface_capabilities2
     vkGetPhysicalDeviceSurfaceCapabilities2KHR         = cast( PFN_vkGetPhysicalDeviceSurfaceCapabilities2KHR         ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceSurfaceCapabilities2KHR" );
@@ -733,12 +768,6 @@ void loadInstanceLevelFunctions( VkInstance instance ) {
     // VK_NV_external_memory_capabilities
     vkGetPhysicalDeviceExternalImageFormatPropertiesNV = cast( PFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceExternalImageFormatPropertiesNV" );
 
-    // VK_KHX_device_group
-    vkGetPhysicalDevicePresentRectanglesKHX            = cast( PFN_vkGetPhysicalDevicePresentRectanglesKHX            ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDevicePresentRectanglesKHX" );
-
-    // VK_KHX_device_group_creation
-    vkEnumeratePhysicalDeviceGroupsKHX                 = cast( PFN_vkEnumeratePhysicalDeviceGroupsKHX                 ) vkGetInstanceProcAddr( instance, "vkEnumeratePhysicalDeviceGroupsKHX" );
-
     // VK_NVX_device_generated_commands
     vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX  = cast( PFN_vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX  ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX" );
 
@@ -747,6 +776,11 @@ void loadInstanceLevelFunctions( VkInstance instance ) {
 
     // VK_EXT_display_surface_counter
     vkGetPhysicalDeviceSurfaceCapabilities2EXT         = cast( PFN_vkGetPhysicalDeviceSurfaceCapabilities2EXT         ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceSurfaceCapabilities2EXT" );
+
+    // VK_EXT_debug_utils
+    vkCreateDebugUtilsMessengerEXT                     = cast( PFN_vkCreateDebugUtilsMessengerEXT                     ) vkGetInstanceProcAddr( instance, "vkCreateDebugUtilsMessengerEXT" );
+    vkDestroyDebugUtilsMessengerEXT                    = cast( PFN_vkDestroyDebugUtilsMessengerEXT                    ) vkGetInstanceProcAddr( instance, "vkDestroyDebugUtilsMessengerEXT" );
+    vkSubmitDebugUtilsMessageEXT                       = cast( PFN_vkSubmitDebugUtilsMessageEXT                       ) vkGetInstanceProcAddr( instance, "vkSubmitDebugUtilsMessageEXT" );
 
     // VK_EXT_sample_locations
     vkGetPhysicalDeviceMultisamplePropertiesEXT        = cast( PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT        ) vkGetInstanceProcAddr( instance, "vkGetPhysicalDeviceMultisamplePropertiesEXT" );
@@ -757,7 +791,7 @@ void loadInstanceLevelFunctions( VkInstance instance ) {
 /// the functions call indirectly through the VkInstance and will be internally dispatched by the implementation
 /// use loadDeviceLevelFunctions( VkDevice device ) bellow to avoid this indirection and get the pointers directly form a VkDevice
 void loadDeviceLevelFunctions( VkInstance instance ) {
-    assert( vkGetInstanceProcAddr !is null, "Must call loadInstanceLevelFunctions before loadDeviceLevelFunctions" );
+    assert( vkGetInstanceProcAddr !is null, "Function pointer vkGetInstanceProcAddr is null!\nCall loadGlobalLevelFunctions -> loadDeviceLevelFunctions( instance )" );
 
     // VK_VERSION_1_0
     vkDestroyDevice                        = cast( PFN_vkDestroyDevice                        ) vkGetInstanceProcAddr( instance, "vkDestroyDevice" );
@@ -881,18 +915,36 @@ void loadDeviceLevelFunctions( VkInstance instance ) {
     vkCmdEndRenderPass                     = cast( PFN_vkCmdEndRenderPass                     ) vkGetInstanceProcAddr( instance, "vkCmdEndRenderPass" );
     vkCmdExecuteCommands                   = cast( PFN_vkCmdExecuteCommands                   ) vkGetInstanceProcAddr( instance, "vkCmdExecuteCommands" );
 
+    // VK_VERSION_1_1
+    vkBindBufferMemory2                    = cast( PFN_vkBindBufferMemory2                    ) vkGetInstanceProcAddr( instance, "vkBindBufferMemory2" );
+    vkBindImageMemory2                     = cast( PFN_vkBindImageMemory2                     ) vkGetInstanceProcAddr( instance, "vkBindImageMemory2" );
+    vkGetDeviceGroupPeerMemoryFeatures     = cast( PFN_vkGetDeviceGroupPeerMemoryFeatures     ) vkGetInstanceProcAddr( instance, "vkGetDeviceGroupPeerMemoryFeatures" );
+    vkCmdSetDeviceMask                     = cast( PFN_vkCmdSetDeviceMask                     ) vkGetInstanceProcAddr( instance, "vkCmdSetDeviceMask" );
+    vkCmdDispatchBase                      = cast( PFN_vkCmdDispatchBase                      ) vkGetInstanceProcAddr( instance, "vkCmdDispatchBase" );
+    vkGetImageMemoryRequirements2          = cast( PFN_vkGetImageMemoryRequirements2          ) vkGetInstanceProcAddr( instance, "vkGetImageMemoryRequirements2" );
+    vkGetBufferMemoryRequirements2         = cast( PFN_vkGetBufferMemoryRequirements2         ) vkGetInstanceProcAddr( instance, "vkGetBufferMemoryRequirements2" );
+    vkGetImageSparseMemoryRequirements2    = cast( PFN_vkGetImageSparseMemoryRequirements2    ) vkGetInstanceProcAddr( instance, "vkGetImageSparseMemoryRequirements2" );
+    vkTrimCommandPool                      = cast( PFN_vkTrimCommandPool                      ) vkGetInstanceProcAddr( instance, "vkTrimCommandPool" );
+    vkGetDeviceQueue2                      = cast( PFN_vkGetDeviceQueue2                      ) vkGetInstanceProcAddr( instance, "vkGetDeviceQueue2" );
+    vkCreateSamplerYcbcrConversion         = cast( PFN_vkCreateSamplerYcbcrConversion         ) vkGetInstanceProcAddr( instance, "vkCreateSamplerYcbcrConversion" );
+    vkDestroySamplerYcbcrConversion        = cast( PFN_vkDestroySamplerYcbcrConversion        ) vkGetInstanceProcAddr( instance, "vkDestroySamplerYcbcrConversion" );
+    vkCreateDescriptorUpdateTemplate       = cast( PFN_vkCreateDescriptorUpdateTemplate       ) vkGetInstanceProcAddr( instance, "vkCreateDescriptorUpdateTemplate" );
+    vkDestroyDescriptorUpdateTemplate      = cast( PFN_vkDestroyDescriptorUpdateTemplate      ) vkGetInstanceProcAddr( instance, "vkDestroyDescriptorUpdateTemplate" );
+    vkUpdateDescriptorSetWithTemplate      = cast( PFN_vkUpdateDescriptorSetWithTemplate      ) vkGetInstanceProcAddr( instance, "vkUpdateDescriptorSetWithTemplate" );
+    vkGetDescriptorSetLayoutSupport        = cast( PFN_vkGetDescriptorSetLayoutSupport        ) vkGetInstanceProcAddr( instance, "vkGetDescriptorSetLayoutSupport" );
+
     // VK_KHR_swapchain
     vkCreateSwapchainKHR                   = cast( PFN_vkCreateSwapchainKHR                   ) vkGetInstanceProcAddr( instance, "vkCreateSwapchainKHR" );
     vkDestroySwapchainKHR                  = cast( PFN_vkDestroySwapchainKHR                  ) vkGetInstanceProcAddr( instance, "vkDestroySwapchainKHR" );
     vkGetSwapchainImagesKHR                = cast( PFN_vkGetSwapchainImagesKHR                ) vkGetInstanceProcAddr( instance, "vkGetSwapchainImagesKHR" );
     vkAcquireNextImageKHR                  = cast( PFN_vkAcquireNextImageKHR                  ) vkGetInstanceProcAddr( instance, "vkAcquireNextImageKHR" );
     vkQueuePresentKHR                      = cast( PFN_vkQueuePresentKHR                      ) vkGetInstanceProcAddr( instance, "vkQueuePresentKHR" );
+    vkGetDeviceGroupPresentCapabilitiesKHR = cast( PFN_vkGetDeviceGroupPresentCapabilitiesKHR ) vkGetInstanceProcAddr( instance, "vkGetDeviceGroupPresentCapabilitiesKHR" );
+    vkGetDeviceGroupSurfacePresentModesKHR = cast( PFN_vkGetDeviceGroupSurfacePresentModesKHR ) vkGetInstanceProcAddr( instance, "vkGetDeviceGroupSurfacePresentModesKHR" );
+    vkAcquireNextImage2KHR                 = cast( PFN_vkAcquireNextImage2KHR                 ) vkGetInstanceProcAddr( instance, "vkAcquireNextImage2KHR" );
 
     // VK_KHR_display_swapchain
     vkCreateSharedSwapchainsKHR            = cast( PFN_vkCreateSharedSwapchainsKHR            ) vkGetInstanceProcAddr( instance, "vkCreateSharedSwapchainsKHR" );
-
-    // VK_KHR_maintenance1
-    vkTrimCommandPoolKHR                   = cast( PFN_vkTrimCommandPoolKHR                   ) vkGetInstanceProcAddr( instance, "vkTrimCommandPoolKHR" );
 
     // VK_KHR_external_memory_fd
     vkGetMemoryFdKHR                       = cast( PFN_vkGetMemoryFdKHR                       ) vkGetInstanceProcAddr( instance, "vkGetMemoryFdKHR" );
@@ -904,11 +956,6 @@ void loadDeviceLevelFunctions( VkInstance instance ) {
 
     // VK_KHR_push_descriptor
     vkCmdPushDescriptorSetKHR              = cast( PFN_vkCmdPushDescriptorSetKHR              ) vkGetInstanceProcAddr( instance, "vkCmdPushDescriptorSetKHR" );
-
-    // VK_KHR_descriptor_update_template
-    vkCreateDescriptorUpdateTemplateKHR    = cast( PFN_vkCreateDescriptorUpdateTemplateKHR    ) vkGetInstanceProcAddr( instance, "vkCreateDescriptorUpdateTemplateKHR" );
-    vkDestroyDescriptorUpdateTemplateKHR   = cast( PFN_vkDestroyDescriptorUpdateTemplateKHR   ) vkGetInstanceProcAddr( instance, "vkDestroyDescriptorUpdateTemplateKHR" );
-    vkUpdateDescriptorSetWithTemplateKHR   = cast( PFN_vkUpdateDescriptorSetWithTemplateKHR   ) vkGetInstanceProcAddr( instance, "vkUpdateDescriptorSetWithTemplateKHR" );
     vkCmdPushDescriptorSetWithTemplateKHR  = cast( PFN_vkCmdPushDescriptorSetWithTemplateKHR  ) vkGetInstanceProcAddr( instance, "vkCmdPushDescriptorSetWithTemplateKHR" );
 
     // VK_KHR_shared_presentable_image
@@ -917,24 +964,6 @@ void loadDeviceLevelFunctions( VkInstance instance ) {
     // VK_KHR_external_fence_fd
     vkImportFenceFdKHR                     = cast( PFN_vkImportFenceFdKHR                     ) vkGetInstanceProcAddr( instance, "vkImportFenceFdKHR" );
     vkGetFenceFdKHR                        = cast( PFN_vkGetFenceFdKHR                        ) vkGetInstanceProcAddr( instance, "vkGetFenceFdKHR" );
-
-    // VK_KHR_get_memory_requirements2
-    vkGetImageMemoryRequirements2KHR       = cast( PFN_vkGetImageMemoryRequirements2KHR       ) vkGetInstanceProcAddr( instance, "vkGetImageMemoryRequirements2KHR" );
-    vkGetBufferMemoryRequirements2KHR      = cast( PFN_vkGetBufferMemoryRequirements2KHR      ) vkGetInstanceProcAddr( instance, "vkGetBufferMemoryRequirements2KHR" );
-    vkGetImageSparseMemoryRequirements2KHR = cast( PFN_vkGetImageSparseMemoryRequirements2KHR ) vkGetInstanceProcAddr( instance, "vkGetImageSparseMemoryRequirements2KHR" );
-
-    // VK_KHR_sampler_ycbcr_conversion
-    vkCreateSamplerYcbcrConversionKHR      = cast( PFN_vkCreateSamplerYcbcrConversionKHR      ) vkGetInstanceProcAddr( instance, "vkCreateSamplerYcbcrConversionKHR" );
-    vkDestroySamplerYcbcrConversionKHR     = cast( PFN_vkDestroySamplerYcbcrConversionKHR     ) vkGetInstanceProcAddr( instance, "vkDestroySamplerYcbcrConversionKHR" );
-
-    // VK_KHR_bind_memory2
-    vkBindBufferMemory2KHR                 = cast( PFN_vkBindBufferMemory2KHR                 ) vkGetInstanceProcAddr( instance, "vkBindBufferMemory2KHR" );
-    vkBindImageMemory2KHR                  = cast( PFN_vkBindImageMemory2KHR                  ) vkGetInstanceProcAddr( instance, "vkBindImageMemory2KHR" );
-
-    // VK_ANDROID_native_buffer
-    vkGetSwapchainGrallocUsageANDROID      = cast( PFN_vkGetSwapchainGrallocUsageANDROID      ) vkGetInstanceProcAddr( instance, "vkGetSwapchainGrallocUsageANDROID" );
-    vkAcquireImageANDROID                  = cast( PFN_vkAcquireImageANDROID                  ) vkGetInstanceProcAddr( instance, "vkAcquireImageANDROID" );
-    vkQueueSignalReleaseImageANDROID       = cast( PFN_vkQueueSignalReleaseImageANDROID       ) vkGetInstanceProcAddr( instance, "vkQueueSignalReleaseImageANDROID" );
 
     // VK_EXT_debug_marker
     vkDebugMarkerSetObjectTagEXT           = cast( PFN_vkDebugMarkerSetObjectTagEXT           ) vkGetInstanceProcAddr( instance, "vkDebugMarkerSetObjectTagEXT" );
@@ -949,14 +978,6 @@ void loadDeviceLevelFunctions( VkInstance instance ) {
 
     // VK_AMD_shader_info
     vkGetShaderInfoAMD                     = cast( PFN_vkGetShaderInfoAMD                     ) vkGetInstanceProcAddr( instance, "vkGetShaderInfoAMD" );
-
-    // VK_KHX_device_group
-    vkGetDeviceGroupPeerMemoryFeaturesKHX  = cast( PFN_vkGetDeviceGroupPeerMemoryFeaturesKHX  ) vkGetInstanceProcAddr( instance, "vkGetDeviceGroupPeerMemoryFeaturesKHX" );
-    vkCmdSetDeviceMaskKHX                  = cast( PFN_vkCmdSetDeviceMaskKHX                  ) vkGetInstanceProcAddr( instance, "vkCmdSetDeviceMaskKHX" );
-    vkCmdDispatchBaseKHX                   = cast( PFN_vkCmdDispatchBaseKHX                   ) vkGetInstanceProcAddr( instance, "vkCmdDispatchBaseKHX" );
-    vkGetDeviceGroupPresentCapabilitiesKHX = cast( PFN_vkGetDeviceGroupPresentCapabilitiesKHX ) vkGetInstanceProcAddr( instance, "vkGetDeviceGroupPresentCapabilitiesKHX" );
-    vkGetDeviceGroupSurfacePresentModesKHX = cast( PFN_vkGetDeviceGroupSurfacePresentModesKHX ) vkGetInstanceProcAddr( instance, "vkGetDeviceGroupSurfacePresentModesKHX" );
-    vkAcquireNextImage2KHX                 = cast( PFN_vkAcquireNextImage2KHX                 ) vkGetInstanceProcAddr( instance, "vkAcquireNextImage2KHX" );
 
     // VK_NVX_device_generated_commands
     vkCmdProcessCommandsNVX                = cast( PFN_vkCmdProcessCommandsNVX                ) vkGetInstanceProcAddr( instance, "vkCmdProcessCommandsNVX" );
@@ -987,6 +1008,16 @@ void loadDeviceLevelFunctions( VkInstance instance ) {
     // VK_EXT_hdr_metadata
     vkSetHdrMetadataEXT                    = cast( PFN_vkSetHdrMetadataEXT                    ) vkGetInstanceProcAddr( instance, "vkSetHdrMetadataEXT" );
 
+    // VK_EXT_debug_utils
+    vkSetDebugUtilsObjectNameEXT           = cast( PFN_vkSetDebugUtilsObjectNameEXT           ) vkGetInstanceProcAddr( instance, "vkSetDebugUtilsObjectNameEXT" );
+    vkSetDebugUtilsObjectTagEXT            = cast( PFN_vkSetDebugUtilsObjectTagEXT            ) vkGetInstanceProcAddr( instance, "vkSetDebugUtilsObjectTagEXT" );
+    vkQueueBeginDebugUtilsLabelEXT         = cast( PFN_vkQueueBeginDebugUtilsLabelEXT         ) vkGetInstanceProcAddr( instance, "vkQueueBeginDebugUtilsLabelEXT" );
+    vkQueueEndDebugUtilsLabelEXT           = cast( PFN_vkQueueEndDebugUtilsLabelEXT           ) vkGetInstanceProcAddr( instance, "vkQueueEndDebugUtilsLabelEXT" );
+    vkQueueInsertDebugUtilsLabelEXT        = cast( PFN_vkQueueInsertDebugUtilsLabelEXT        ) vkGetInstanceProcAddr( instance, "vkQueueInsertDebugUtilsLabelEXT" );
+    vkCmdBeginDebugUtilsLabelEXT           = cast( PFN_vkCmdBeginDebugUtilsLabelEXT           ) vkGetInstanceProcAddr( instance, "vkCmdBeginDebugUtilsLabelEXT" );
+    vkCmdEndDebugUtilsLabelEXT             = cast( PFN_vkCmdEndDebugUtilsLabelEXT             ) vkGetInstanceProcAddr( instance, "vkCmdEndDebugUtilsLabelEXT" );
+    vkCmdInsertDebugUtilsLabelEXT          = cast( PFN_vkCmdInsertDebugUtilsLabelEXT          ) vkGetInstanceProcAddr( instance, "vkCmdInsertDebugUtilsLabelEXT" );
+
     // VK_EXT_sample_locations
     vkCmdSetSampleLocationsEXT             = cast( PFN_vkCmdSetSampleLocationsEXT             ) vkGetInstanceProcAddr( instance, "vkCmdSetSampleLocationsEXT" );
 
@@ -1007,9 +1038,9 @@ void loadDeviceLevelFunctions( VkInstance instance ) {
 /// with a valid VkDevice call this function to retrieve VkDevice, VkQueue and VkCommandBuffer related functions
 /// the functions call directly VkDevice and related resources and can be retrieved for one and only one VkDevice
 /// calling this function again with another VkDevices will overwrite the __gshared functions retrieved previously
-/// use createGroupedDeviceLevelFunctions bellow if usage of multiple VkDevices is required
+/// see module erupted.dispatch_device if multiple VkDevices will be used
 void loadDeviceLevelFunctions( VkDevice device ) {
-    assert( vkGetDeviceProcAddr !is null, "Must call loadInstanceLevelFunctions before loadDeviceLevelFunctions" );
+    assert( vkGetDeviceProcAddr !is null, "Function pointer vkGetDeviceProcAddr is null!\nCall loadGlobalLevelFunctions -> loadInstanceLevelFunctions -> loadDeviceLevelFunctions( device )" );
 
     // VK_VERSION_1_0
     vkDestroyDevice                        = cast( PFN_vkDestroyDevice                        ) vkGetDeviceProcAddr( device, "vkDestroyDevice" );
@@ -1133,18 +1164,36 @@ void loadDeviceLevelFunctions( VkDevice device ) {
     vkCmdEndRenderPass                     = cast( PFN_vkCmdEndRenderPass                     ) vkGetDeviceProcAddr( device, "vkCmdEndRenderPass" );
     vkCmdExecuteCommands                   = cast( PFN_vkCmdExecuteCommands                   ) vkGetDeviceProcAddr( device, "vkCmdExecuteCommands" );
 
+    // VK_VERSION_1_1
+    vkBindBufferMemory2                    = cast( PFN_vkBindBufferMemory2                    ) vkGetDeviceProcAddr( device, "vkBindBufferMemory2" );
+    vkBindImageMemory2                     = cast( PFN_vkBindImageMemory2                     ) vkGetDeviceProcAddr( device, "vkBindImageMemory2" );
+    vkGetDeviceGroupPeerMemoryFeatures     = cast( PFN_vkGetDeviceGroupPeerMemoryFeatures     ) vkGetDeviceProcAddr( device, "vkGetDeviceGroupPeerMemoryFeatures" );
+    vkCmdSetDeviceMask                     = cast( PFN_vkCmdSetDeviceMask                     ) vkGetDeviceProcAddr( device, "vkCmdSetDeviceMask" );
+    vkCmdDispatchBase                      = cast( PFN_vkCmdDispatchBase                      ) vkGetDeviceProcAddr( device, "vkCmdDispatchBase" );
+    vkGetImageMemoryRequirements2          = cast( PFN_vkGetImageMemoryRequirements2          ) vkGetDeviceProcAddr( device, "vkGetImageMemoryRequirements2" );
+    vkGetBufferMemoryRequirements2         = cast( PFN_vkGetBufferMemoryRequirements2         ) vkGetDeviceProcAddr( device, "vkGetBufferMemoryRequirements2" );
+    vkGetImageSparseMemoryRequirements2    = cast( PFN_vkGetImageSparseMemoryRequirements2    ) vkGetDeviceProcAddr( device, "vkGetImageSparseMemoryRequirements2" );
+    vkTrimCommandPool                      = cast( PFN_vkTrimCommandPool                      ) vkGetDeviceProcAddr( device, "vkTrimCommandPool" );
+    vkGetDeviceQueue2                      = cast( PFN_vkGetDeviceQueue2                      ) vkGetDeviceProcAddr( device, "vkGetDeviceQueue2" );
+    vkCreateSamplerYcbcrConversion         = cast( PFN_vkCreateSamplerYcbcrConversion         ) vkGetDeviceProcAddr( device, "vkCreateSamplerYcbcrConversion" );
+    vkDestroySamplerYcbcrConversion        = cast( PFN_vkDestroySamplerYcbcrConversion        ) vkGetDeviceProcAddr( device, "vkDestroySamplerYcbcrConversion" );
+    vkCreateDescriptorUpdateTemplate       = cast( PFN_vkCreateDescriptorUpdateTemplate       ) vkGetDeviceProcAddr( device, "vkCreateDescriptorUpdateTemplate" );
+    vkDestroyDescriptorUpdateTemplate      = cast( PFN_vkDestroyDescriptorUpdateTemplate      ) vkGetDeviceProcAddr( device, "vkDestroyDescriptorUpdateTemplate" );
+    vkUpdateDescriptorSetWithTemplate      = cast( PFN_vkUpdateDescriptorSetWithTemplate      ) vkGetDeviceProcAddr( device, "vkUpdateDescriptorSetWithTemplate" );
+    vkGetDescriptorSetLayoutSupport        = cast( PFN_vkGetDescriptorSetLayoutSupport        ) vkGetDeviceProcAddr( device, "vkGetDescriptorSetLayoutSupport" );
+
     // VK_KHR_swapchain
     vkCreateSwapchainKHR                   = cast( PFN_vkCreateSwapchainKHR                   ) vkGetDeviceProcAddr( device, "vkCreateSwapchainKHR" );
     vkDestroySwapchainKHR                  = cast( PFN_vkDestroySwapchainKHR                  ) vkGetDeviceProcAddr( device, "vkDestroySwapchainKHR" );
     vkGetSwapchainImagesKHR                = cast( PFN_vkGetSwapchainImagesKHR                ) vkGetDeviceProcAddr( device, "vkGetSwapchainImagesKHR" );
     vkAcquireNextImageKHR                  = cast( PFN_vkAcquireNextImageKHR                  ) vkGetDeviceProcAddr( device, "vkAcquireNextImageKHR" );
     vkQueuePresentKHR                      = cast( PFN_vkQueuePresentKHR                      ) vkGetDeviceProcAddr( device, "vkQueuePresentKHR" );
+    vkGetDeviceGroupPresentCapabilitiesKHR = cast( PFN_vkGetDeviceGroupPresentCapabilitiesKHR ) vkGetDeviceProcAddr( device, "vkGetDeviceGroupPresentCapabilitiesKHR" );
+    vkGetDeviceGroupSurfacePresentModesKHR = cast( PFN_vkGetDeviceGroupSurfacePresentModesKHR ) vkGetDeviceProcAddr( device, "vkGetDeviceGroupSurfacePresentModesKHR" );
+    vkAcquireNextImage2KHR                 = cast( PFN_vkAcquireNextImage2KHR                 ) vkGetDeviceProcAddr( device, "vkAcquireNextImage2KHR" );
 
     // VK_KHR_display_swapchain
     vkCreateSharedSwapchainsKHR            = cast( PFN_vkCreateSharedSwapchainsKHR            ) vkGetDeviceProcAddr( device, "vkCreateSharedSwapchainsKHR" );
-
-    // VK_KHR_maintenance1
-    vkTrimCommandPoolKHR                   = cast( PFN_vkTrimCommandPoolKHR                   ) vkGetDeviceProcAddr( device, "vkTrimCommandPoolKHR" );
 
     // VK_KHR_external_memory_fd
     vkGetMemoryFdKHR                       = cast( PFN_vkGetMemoryFdKHR                       ) vkGetDeviceProcAddr( device, "vkGetMemoryFdKHR" );
@@ -1156,11 +1205,6 @@ void loadDeviceLevelFunctions( VkDevice device ) {
 
     // VK_KHR_push_descriptor
     vkCmdPushDescriptorSetKHR              = cast( PFN_vkCmdPushDescriptorSetKHR              ) vkGetDeviceProcAddr( device, "vkCmdPushDescriptorSetKHR" );
-
-    // VK_KHR_descriptor_update_template
-    vkCreateDescriptorUpdateTemplateKHR    = cast( PFN_vkCreateDescriptorUpdateTemplateKHR    ) vkGetDeviceProcAddr( device, "vkCreateDescriptorUpdateTemplateKHR" );
-    vkDestroyDescriptorUpdateTemplateKHR   = cast( PFN_vkDestroyDescriptorUpdateTemplateKHR   ) vkGetDeviceProcAddr( device, "vkDestroyDescriptorUpdateTemplateKHR" );
-    vkUpdateDescriptorSetWithTemplateKHR   = cast( PFN_vkUpdateDescriptorSetWithTemplateKHR   ) vkGetDeviceProcAddr( device, "vkUpdateDescriptorSetWithTemplateKHR" );
     vkCmdPushDescriptorSetWithTemplateKHR  = cast( PFN_vkCmdPushDescriptorSetWithTemplateKHR  ) vkGetDeviceProcAddr( device, "vkCmdPushDescriptorSetWithTemplateKHR" );
 
     // VK_KHR_shared_presentable_image
@@ -1169,24 +1213,6 @@ void loadDeviceLevelFunctions( VkDevice device ) {
     // VK_KHR_external_fence_fd
     vkImportFenceFdKHR                     = cast( PFN_vkImportFenceFdKHR                     ) vkGetDeviceProcAddr( device, "vkImportFenceFdKHR" );
     vkGetFenceFdKHR                        = cast( PFN_vkGetFenceFdKHR                        ) vkGetDeviceProcAddr( device, "vkGetFenceFdKHR" );
-
-    // VK_KHR_get_memory_requirements2
-    vkGetImageMemoryRequirements2KHR       = cast( PFN_vkGetImageMemoryRequirements2KHR       ) vkGetDeviceProcAddr( device, "vkGetImageMemoryRequirements2KHR" );
-    vkGetBufferMemoryRequirements2KHR      = cast( PFN_vkGetBufferMemoryRequirements2KHR      ) vkGetDeviceProcAddr( device, "vkGetBufferMemoryRequirements2KHR" );
-    vkGetImageSparseMemoryRequirements2KHR = cast( PFN_vkGetImageSparseMemoryRequirements2KHR ) vkGetDeviceProcAddr( device, "vkGetImageSparseMemoryRequirements2KHR" );
-
-    // VK_KHR_sampler_ycbcr_conversion
-    vkCreateSamplerYcbcrConversionKHR      = cast( PFN_vkCreateSamplerYcbcrConversionKHR      ) vkGetDeviceProcAddr( device, "vkCreateSamplerYcbcrConversionKHR" );
-    vkDestroySamplerYcbcrConversionKHR     = cast( PFN_vkDestroySamplerYcbcrConversionKHR     ) vkGetDeviceProcAddr( device, "vkDestroySamplerYcbcrConversionKHR" );
-
-    // VK_KHR_bind_memory2
-    vkBindBufferMemory2KHR                 = cast( PFN_vkBindBufferMemory2KHR                 ) vkGetDeviceProcAddr( device, "vkBindBufferMemory2KHR" );
-    vkBindImageMemory2KHR                  = cast( PFN_vkBindImageMemory2KHR                  ) vkGetDeviceProcAddr( device, "vkBindImageMemory2KHR" );
-
-    // VK_ANDROID_native_buffer
-    vkGetSwapchainGrallocUsageANDROID      = cast( PFN_vkGetSwapchainGrallocUsageANDROID      ) vkGetDeviceProcAddr( device, "vkGetSwapchainGrallocUsageANDROID" );
-    vkAcquireImageANDROID                  = cast( PFN_vkAcquireImageANDROID                  ) vkGetDeviceProcAddr( device, "vkAcquireImageANDROID" );
-    vkQueueSignalReleaseImageANDROID       = cast( PFN_vkQueueSignalReleaseImageANDROID       ) vkGetDeviceProcAddr( device, "vkQueueSignalReleaseImageANDROID" );
 
     // VK_EXT_debug_marker
     vkDebugMarkerSetObjectTagEXT           = cast( PFN_vkDebugMarkerSetObjectTagEXT           ) vkGetDeviceProcAddr( device, "vkDebugMarkerSetObjectTagEXT" );
@@ -1201,14 +1227,6 @@ void loadDeviceLevelFunctions( VkDevice device ) {
 
     // VK_AMD_shader_info
     vkGetShaderInfoAMD                     = cast( PFN_vkGetShaderInfoAMD                     ) vkGetDeviceProcAddr( device, "vkGetShaderInfoAMD" );
-
-    // VK_KHX_device_group
-    vkGetDeviceGroupPeerMemoryFeaturesKHX  = cast( PFN_vkGetDeviceGroupPeerMemoryFeaturesKHX  ) vkGetDeviceProcAddr( device, "vkGetDeviceGroupPeerMemoryFeaturesKHX" );
-    vkCmdSetDeviceMaskKHX                  = cast( PFN_vkCmdSetDeviceMaskKHX                  ) vkGetDeviceProcAddr( device, "vkCmdSetDeviceMaskKHX" );
-    vkCmdDispatchBaseKHX                   = cast( PFN_vkCmdDispatchBaseKHX                   ) vkGetDeviceProcAddr( device, "vkCmdDispatchBaseKHX" );
-    vkGetDeviceGroupPresentCapabilitiesKHX = cast( PFN_vkGetDeviceGroupPresentCapabilitiesKHX ) vkGetDeviceProcAddr( device, "vkGetDeviceGroupPresentCapabilitiesKHX" );
-    vkGetDeviceGroupSurfacePresentModesKHX = cast( PFN_vkGetDeviceGroupSurfacePresentModesKHX ) vkGetDeviceProcAddr( device, "vkGetDeviceGroupSurfacePresentModesKHX" );
-    vkAcquireNextImage2KHX                 = cast( PFN_vkAcquireNextImage2KHX                 ) vkGetDeviceProcAddr( device, "vkAcquireNextImage2KHX" );
 
     // VK_NVX_device_generated_commands
     vkCmdProcessCommandsNVX                = cast( PFN_vkCmdProcessCommandsNVX                ) vkGetDeviceProcAddr( device, "vkCmdProcessCommandsNVX" );
@@ -1238,6 +1256,16 @@ void loadDeviceLevelFunctions( VkDevice device ) {
 
     // VK_EXT_hdr_metadata
     vkSetHdrMetadataEXT                    = cast( PFN_vkSetHdrMetadataEXT                    ) vkGetDeviceProcAddr( device, "vkSetHdrMetadataEXT" );
+
+    // VK_EXT_debug_utils
+    vkSetDebugUtilsObjectNameEXT           = cast( PFN_vkSetDebugUtilsObjectNameEXT           ) vkGetDeviceProcAddr( device, "vkSetDebugUtilsObjectNameEXT" );
+    vkSetDebugUtilsObjectTagEXT            = cast( PFN_vkSetDebugUtilsObjectTagEXT            ) vkGetDeviceProcAddr( device, "vkSetDebugUtilsObjectTagEXT" );
+    vkQueueBeginDebugUtilsLabelEXT         = cast( PFN_vkQueueBeginDebugUtilsLabelEXT         ) vkGetDeviceProcAddr( device, "vkQueueBeginDebugUtilsLabelEXT" );
+    vkQueueEndDebugUtilsLabelEXT           = cast( PFN_vkQueueEndDebugUtilsLabelEXT           ) vkGetDeviceProcAddr( device, "vkQueueEndDebugUtilsLabelEXT" );
+    vkQueueInsertDebugUtilsLabelEXT        = cast( PFN_vkQueueInsertDebugUtilsLabelEXT        ) vkGetDeviceProcAddr( device, "vkQueueInsertDebugUtilsLabelEXT" );
+    vkCmdBeginDebugUtilsLabelEXT           = cast( PFN_vkCmdBeginDebugUtilsLabelEXT           ) vkGetDeviceProcAddr( device, "vkCmdBeginDebugUtilsLabelEXT" );
+    vkCmdEndDebugUtilsLabelEXT             = cast( PFN_vkCmdEndDebugUtilsLabelEXT             ) vkGetDeviceProcAddr( device, "vkCmdEndDebugUtilsLabelEXT" );
+    vkCmdInsertDebugUtilsLabelEXT          = cast( PFN_vkCmdInsertDebugUtilsLabelEXT          ) vkGetDeviceProcAddr( device, "vkCmdInsertDebugUtilsLabelEXT" );
 
     // VK_EXT_sample_locations
     vkCmdSetSampleLocationsEXT             = cast( PFN_vkCmdSetSampleLocationsEXT             ) vkGetDeviceProcAddr( device, "vkCmdSetSampleLocationsEXT" );
