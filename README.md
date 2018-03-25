@@ -2,10 +2,12 @@
 
 
 ErupteD-V2
-=======
+==========
 
 Automatically-generated D bindings for the [Vulkan API](https://www.khronos.org/Vulkan/) based on [D-Vulkan](https://github.com/ColonelThirtyTwo/dvulkan). A Vulkan lib loader is included. Acquiring Vulkan functions is based on Intel [API without Secrets](https://software.intel.com/en-us/api-without-secrets-introduction-to-vulkan-part-1).  
 ErupteD-V2 will eventually replace, and later on be renamed to, ErupteD. Reasoning why ErupteD-V2 is required in the first place can be found in the [deprecation and upgrade process](https://github.com/ParticlePeter/Erupted-V2#erupted-deprecation-and-upgrade-process) paragraph. 
+
+
 
 Usage
 -----
@@ -36,15 +38,17 @@ Steps to follow:
 
 Examples for checking instnace and device layers as well as device creation can be found in the `examples` directory, and run with `dub run erupted:examplename`. Examples found in 'examples/platform' directory are just explenatory and cannot be build or run (see [Platform Extensions](https://github.com/ParticlePeter/Erupted-V2#platform-extensions))
 
+
+
 C vs D API
---------------
+----------
+
 * `VK_NULL_HANDLE` is defined as `0` and can be used as `uint64_t` type and `pointer` type argument in C world. D's `null` can be used only as a pointer argument. This is an issue when compiling for 32 bit, as dispatchable handles (`VkInstance`, `VkPhysicalDevice`, `VkDevice`, `VkQueue`) are pointer types while non dispatchable handles (e.g. `VkSemaphore`) are `uint64_t` types. Hence ErupteD `VK_NULL_HANDLE` can only be used as dispatchable null handle (on 32 Bit!). For non dispatchable handles another ErupteD symbol exist `VK_NULL_ND_HANDLE`. On 64 bit all handles are pointer types and `VK_NULL_HANDLE` can be used at any place. However `VK_NULL_ND_HANDLE` is still defined for sake of completeness and ease of use. The issue might be solved when `multiple alias this` is released, hence I recommend building 64 Bit apps and ignore `VK_NULL_ND_HANDLE`. Best practice summary:
     * if exclusively building a 32 Bit app or switching forth and back between 32 and 64 Bit use `VK_NULL_ND_HANDLE` for non dispatchable handles
     * if exclusively building a 64 Bit app `VK_NULL_HANDLE` can be used as any of the two vk handle types
 * named enums in D are not global but they are forwarded into global scope. Hence e.g. `VkResult.VK_SUCCESS` and `VK_SUCCESS` can both be used
 * all structures have their `sType` field set to the appropriate value upon initialization; explicit initialization is not needed
 * `VkPipelineShaderStageCreateInfo.module` has been renamed to `VkPipelineShaderStageCreateInfo._module`, since `module` is a D keyword
-
 
 
 
@@ -80,8 +84,9 @@ Needless to say that `some_command_buffer` must have been acquired from the priv
 The Mechanism does NOT work with queues, there are about four queue related functions which most probably won't be used in bulk.
 
 
+
 Platform Extensions
----------------------------
+-------------------
 
 Platform extensions, found in module `erupted.platform.mixin_extensions`, exist in form of the configurable `mixin template Platform_Extensions( extensions... )`. With this template you can mixin extension related code into your project, but you need to take care of the dependencies yourself:
 ```
@@ -106,6 +111,8 @@ The only official platform API (as in being part of the dlang standard lib/runti
 ErupteD should not rely on unofficial dependencies, as they may brake or become deprecated.
 Moreover, specifying several different platform dependencies in dub.sdl/.json does pollute the local dub cache with foreign platform projects, even if they are usable on the current platform (e.g. `xlib-d` on windows platform).
 
+
+
 Generating Bindings
 -------------------
 
@@ -114,18 +121,19 @@ V-Erupt is a submodule of Erupted-V2. Either invoke `git submodule update --init
 Finally, to erupt the dlang bindings, call `erupt_dlang.py` passing `path/to/Vulkan-docs` as first argument and an output folder for the D files as second argument.
 
 
+
 ErupteD Deprecation and Upgrade Process
--------------------
+---------------------------------------
+
 ErupteD-V2 is supposed to replace ErupteD, preferably keeping the original project name. The challenge in this endeavor lies in the significant breaking changes and the desired reset of semantic versions. The replaced ErupteD is supposed to match the Vulkan-Docs versioning, but the current ErupteD versioning is far beyond those.
 
 The following release and deprecation process shall ease the transition from old to new clean slate ErupteD:
 
 - [ x ] release ErupteD-V2
-- [ x ] rename ErupteD to ErupteD-V1
-- [ x ] create new repo ErupteD and add ErupteD-V1 as upstrem repo
+- [ x ] release ErupteD-V1, forked from current state ErupteD
 - [ x ] deprecate ErupteD module `erupted.types` in place of the whole ErupteD project
-- [ _ ] May 1st 2018, destroy ErupteD project and rename ErupteD-V2 to ErupteD
-- [ _ ] create new repo ErupteD-V2 and add ErupteD as upstream repo
+- [ _ ] May 1st 2018, destroy ErupteD
+- [ _ ] recreate and release ErupteD with all published releases from Erupted-V2 (should be few)
 - [ _ ] deprecate ErupteD-V2 module `erupted.types` in place of the whole ErupteD-V2 project
 - [ _ ] June 1st 2018 destroy ErupteD-V2
 - [ _ ] destroy or archive ErupteD-V1
