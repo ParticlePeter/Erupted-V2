@@ -30,7 +30,7 @@ private:
 /// private helper functions for posix platforms
 version( Posix ) {
 private:
-    import core.sys.posix.dlfcn : dlerror, dlopen, dlclose, dlsym;
+    import core.sys.posix.dlfcn : dlerror, dlopen, dlclose, dlsym, RTLD_LAZY, RTLD_LOCAL;
     void*           vulkan_lib  = null;
     auto loadLib()  { return dlopen( "libvulkan.so.1", RTLD_LAZY | RTLD_LOCAL ); }
     auto freeLib()  { return dlclose( vulkan_lib ) == 0; }
